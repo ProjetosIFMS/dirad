@@ -1,0 +1,11 @@
+meta {
+  name: ListAll
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseURL}}/activity
+  body: json
+  auth: inherit
+}

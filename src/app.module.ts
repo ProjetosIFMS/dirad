@@ -6,9 +6,10 @@ import { StepModule } from './modules/step/step.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { GoogleStrategy } from './shared/strategies/google.strategy';
 import { AuthService } from './modules/auth/auth.service';
+import { ActivityModule } from './activity/activity.module';
 
 @Module({
-  imports: [StepModule, UserModule, AuthModule],
+  imports: [StepModule, UserModule, AuthModule, ActivityModule],
   controllers: [AppController],
   providers: [AppService, AuthService, GoogleStrategy, Logger],
 })
