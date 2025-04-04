@@ -1,0 +1,18 @@
+meta {
+  name: delete step
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{base_url}}/step/cm93412xj0009se9sstc0q1oy
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status":false,
+    "order":10
+  }
+}
