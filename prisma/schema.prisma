@@ -1,9 +1,11 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 generator erd {
   provider = "prisma-erd-generator"
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -18,15 +20,30 @@ enum Status {
 
 model User {
   id            String          @id @default(cuid())
-  name          String
+  firstName     String
+  lastName      String
+  picture       String?
   email         String          @unique
   password      String
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   // Relação one-to-many com CompletedStep: um usuário pode ter muitos passos completados
   completedStep CompletedStep[]
+  sessions      Session[]
+
   @@index([email])
-  @@index([name])
+  @@index([firstName])
+}
+
+model Session {
+  id            String   @id @unique @default(uuid())
+  refresh_token String
+  expires_at    DateTime
+  userId        String
+  User          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
 }
 
 model Activity {
@@ -37,6 +54,7 @@ model Activity {
   updatedAt   DateTime @updatedAt
   // Relação one-to-many com Step: uma atividade pode ter muitos passos
   step        Step[]
+
   @@index([name])
 }
 
@@ -53,6 +71,7 @@ model Step {
   activityId    String
   // Relação one-to-many com CompletedStep: um passo pode ter muitas instâncias completadas
   completedStep CompletedStep[]
+
   @@index([activityId])
   @@index([status])
   @@index([deadline])
@@ -71,6 +90,7 @@ model CompletedStep {
   // Relação many-to-one com User: cada completedStep é realizado por um único usuário
   user        User      @relation(fields: [userId], references: [id])
   userId      String
+
   @@index([stepId])
   @@index([checklistId])
   @@index([userId])
@@ -87,6 +107,7 @@ model Checklist {
   completedStep CompletedStep[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
+
   @@index([processId])
 }
 
@@ -100,6 +121,7 @@ model Unit {
   processes          Process[]
   // Relação one-to-many com ParticipatingUnit: uma unidade pode participar de muitos processos
   participatingUnits ParticipatingUnit[]
+
   @@index([name])
 }
 
@@ -111,6 +133,7 @@ model ProcessType {
   updatedAt   DateTime  @updatedAt
   // Relação one-to-many com Process: um tipo de processo pode ter muitos processos
   processes   Process[]
+
   @@index([name])
 }
 
@@ -138,6 +161,7 @@ model Process {
   checklistId           String              @unique
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
+
   @@index([processNumber])
   @@index([processTypeId])
   @@index([managingUnitId])
