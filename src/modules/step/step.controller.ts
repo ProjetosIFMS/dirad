@@ -16,8 +16,8 @@ export class StepController {
   constructor(private readonly stepService: StepService) {}
 
   @Post()
-  create(@Body() createStepDto: CreateStepDto) {
-    return this.stepService.create(createStepDto);
+  create(@Body() data: CreateStepDto) {
+    return this.stepService.create(data);
   }
 
   @Get()
@@ -27,16 +27,16 @@ export class StepController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.stepService.findOne(+id);
+    return this.stepService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStepDto: UpdateStepDto) {
-    return this.stepService.update(+id, updateStepDto);
+  update(@Param('id') id: string, @Body() data: UpdateStepDto) {
+    return this.stepService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.stepService.remove(+id);
+    return this.stepService.remove(id);
   }
 }

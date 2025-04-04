@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStepDto } from './dto/create-step.dto';
 import { UpdateStepDto } from './dto/update-step.dto';
+import { CreateStepUseCase } from './use-cases/create-step.use-case';
+import { FindAllStepsUseCase } from './use-cases/find-all-step.use-case';
+import { FindStepByIdUseCase } from './use-cases/find-step.use-case';
+import { DeleteStepUseCase, UpdateStepUseCase } from './use-cases';
 
 @Injectable()
 export class StepService {
-  create(createStepDto: CreateStepDto) {
-    return createStepDto;
+  constructor(
+    private readonly CreateStepUseCase: CreateStepUseCase,
+    private readonly FindAllStepsUseCase: FindAllStepsUseCase,
+    private readonly FindStepByIdUseCase: FindStepByIdUseCase,
+    private readonly UpdateStepUseCase: UpdateStepUseCase,
+    private readonly DeleteStepUseCase: DeleteStepUseCase,
+  ) {}
+  async create(data: CreateStepDto) {
+    return await this.CreateStepUseCase.createStep(data);
   }
 
-  findAll() {
-    return `This action returns all step`;
+  async findAll() {
+    return await this.FindAllStepsUseCase.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} step`;
+  async findOne(id: string) {
+    return await this.FindStepByIdUseCase.execute(id);
   }
 
-  update(id: number, updateStepDto: UpdateStepDto) {
-    return { updateStepDto, id };
+  async update(id: string, data: UpdateStepDto) {
+    return await this.UpdateStepUseCase.execute(id, data);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} step`;
+  async remove(id: string) {
+    return await this.DeleteStepUseCase.execute(id);
   }
 }

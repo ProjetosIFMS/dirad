@@ -1,4 +1,24 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateStepDto } from './create-step.dto';
+import { IsBoolean, IsDateString, IsInt, IsString } from 'class-validator';
 
-export class UpdateStepDto extends PartialType(CreateStepDto) {}
+export class UpdateStepDto {
+  @IsString()
+  description: string;
+
+  @IsString()
+  origin: string;
+
+  @IsString()
+  destiny: string;
+
+  @IsDateString()
+  deadline: Date;
+
+  @IsBoolean()
+  status: boolean;
+
+  @IsInt()
+  order: number;
+
+  @IsString()
+  activityId: string;
+}
