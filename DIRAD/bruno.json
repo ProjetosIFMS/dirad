@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "DIRAD",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
