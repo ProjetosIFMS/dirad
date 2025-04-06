@@ -21,7 +21,7 @@ export class CreateProcessTypeUseCase {
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
-        description: 'Error creating Unit',
+        description: 'Error creating process type',
       });
       this.logger.error(error.message);
       throw err;
