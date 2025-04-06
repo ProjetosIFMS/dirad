@@ -1,0 +1,18 @@
+meta {
+  name: find process type
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base_url}}/process-type/cm94t950i0000sexdx0phzmh2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name":"test",
+    "description":"teste"
+  }
+}

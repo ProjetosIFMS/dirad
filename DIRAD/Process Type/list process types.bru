@@ -1,0 +1,18 @@
+meta {
+  name: list process types
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/process-type
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name":"test",
+    "description":"teste"
+  }
+}

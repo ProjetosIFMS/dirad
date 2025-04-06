@@ -1,0 +1,18 @@
+meta {
+  name: create process type
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/process-type
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name":"teste 2",
+    "description":"teste 2"
+  }
+}
