@@ -5,7 +5,7 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class FindAllStepsRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async FindAllSteps() {
+  async FindAll() {
     return await this.prisma.step.findMany();
   }
 }

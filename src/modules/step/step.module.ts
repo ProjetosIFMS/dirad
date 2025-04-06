@@ -1,28 +1,16 @@
 import { Logger, Module } from '@nestjs/common';
 import * as UseCases from './use-cases';
+import * as Repositories from './repository';
 import { StepService } from './step.service';
 import { StepController } from './step.controller';
-import { StepRepository } from './repository/create-step.repository';
 import { SharedModule } from 'src/shared/shared.module';
-import { FindAllStepsRepository } from './repository/find-all-step.repository';
-import { FindStepRepository } from './repository/find-step.repository';
-import { UpdateStepRepository } from './repository/update-step.repository';
-import { DeleteStepRepository } from './repository/delete-step.repository';
 
 const usecases = Object.values(UseCases);
+const repositories = Object.values(Repositories);
 
 @Module({
   imports: [SharedModule],
   controllers: [StepController],
-  providers: [
-    StepService,
-    ...usecases,
-    Logger,
-    StepRepository,
-    FindAllStepsRepository,
-    FindStepRepository,
-    UpdateStepRepository,
-    DeleteStepRepository,
-  ],
+  providers: [StepService, ...usecases, ...repositories, Logger],
 })
 export class StepModule {}

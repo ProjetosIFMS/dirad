@@ -4,33 +4,32 @@ import {
   NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { DeleteStepRepository } from '../repository/delete-step.repository';
-import { FindStepRepository } from '../repository/find-step.repository';
+import { DeleteStepRepository, FindStepByIdRepository } from '../repository';
 
 @Injectable()
 export class DeleteStepUseCase {
   constructor(
-    private readonly DeleteStepRepository: DeleteStepRepository,
-    private readonly FindStepRepository: FindStepRepository,
+    private readonly StepRepository: DeleteStepRepository,
+    private readonly FindStepByIdRepository: FindStepByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute(id: string) {
     try {
-      const stepExist = await this.FindStepRepository.FindStepById(id);
+      const stepExist = await this.FindStepByIdRepository.FindById(id);
       if (!stepExist) {
-        const error = new NotFoundException('Step not found');
-        throw error;
+        throw new NotFoundException('Step not found');
       }
-      const step = await this.DeleteStepRepository.deleteStep(id);
-      this.logger.log('Step deleted.', DeleteStepRepository.name);
+
+      const step = await this.StepRepository.delete(id);
+      this.logger.log('Step deleted.', DeleteStepUseCase.name);
       return step;
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error deleting Step',
       });
-      this.logger.error(err.message);
+      this.logger.error(error.message);
       throw err;
     }
   }

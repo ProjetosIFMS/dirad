@@ -4,36 +4,33 @@ import {
   NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { UpdateStepRepository } from '../repository/update-step.repository';
-import { FindStepRepository } from '../repository/find-step.repository';
+import { UpdateStepRepository, FindStepByIdRepository } from '../repository';
 import { UpdateStepDto } from '../dto/update-step.dto';
 
 @Injectable()
 export class UpdateStepUseCase {
   constructor(
-    private readonly UpdateStepRepository: UpdateStepRepository,
-    private readonly FindStepRepository: FindStepRepository,
+    private readonly StepRepository: UpdateStepRepository,
+    private readonly findStepByIdRepository: FindStepByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute(id: string, data: UpdateStepDto) {
     try {
-      const stepExist = await this.FindStepRepository.FindStepById(id);
+      const stepExist = await this.findStepByIdRepository.FindById(id);
       if (!stepExist) {
-        const error = new NotFoundException('Step not found');
-        this.logger.error(error.message);
-        throw error;
+        throw new NotFoundException('Step not found');
       }
-      const step = await this.UpdateStepRepository.updateStep(id, data);
 
+      const step = await this.StepRepository.update(id, data);
       this.logger.log('Step updated', UpdateStepUseCase.name);
       return step;
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error updating Step',
       });
-      this.logger.error(err.message);
+      this.logger.error(error.message);
       throw err;
     }
   }

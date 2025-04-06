@@ -3,20 +3,20 @@ import {
   Logger,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { StepRepository } from '../repository/create-step.repository';
+import { CreateStepRepository } from '../repository/create-step.repository';
 import { CreateStepDto } from '../dto/create-step.dto';
 
 @Injectable()
 export class CreateStepUseCase {
   constructor(
-    private readonly StepRepository: StepRepository,
-    private readonly logger: Logger,
+    private readonly StepRepository: CreateStepRepository,
+    private readonly logger: Logger = new Logger(),
   ) {}
 
-  async createStep(data: CreateStepDto) {
+  async execute(data: CreateStepDto) {
     try {
       const step = await this.StepRepository.create(data);
-      this.logger.log('Step Created', CreateStepUseCase);
+      this.logger.log('Step Created', CreateStepUseCase.name);
       return step;
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {
