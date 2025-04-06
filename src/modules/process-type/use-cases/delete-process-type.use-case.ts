@@ -31,7 +31,7 @@ export class DeleteProcessTypeUseCase {
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad Happened', {
         cause: err,
-        description: 'Error updating process type',
+        description: 'Error deleting process type',
       });
       this.logger.error(error.message);
       throw err;
