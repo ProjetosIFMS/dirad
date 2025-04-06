@@ -6,7 +6,7 @@ import { UpdateStepDto } from '../dto/update-step.dto';
 export class UpdateStepRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async updateStep(id: string, data: UpdateStepDto) {
+  async update(id: string, data: UpdateStepDto) {
     const step = await this.prisma.step.update({
       where: { id },
       data,

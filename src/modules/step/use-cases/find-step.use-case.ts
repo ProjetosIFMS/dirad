@@ -1,35 +1,32 @@
+import { FindStepByIdRepository } from '../repository';
 import {
   Logger,
   Injectable,
   NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { FindStepRepository } from '../repository/find-step.repository';
 
 @Injectable()
 export class FindStepByIdUseCase {
   constructor(
-    private readonly findStepById: FindStepRepository,
+    private readonly StepRepository: FindStepByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute(id: string) {
     try {
-      const stepExist = await this.findStepById.FindStepById(id);
-
-      if (!stepExist) {
-        const error = new NotFoundException('Step not found');
-        this.logger.error(error.message);
-        throw error;
+      const step = await this.StepRepository.FindById(id);
+      if (!step) {
+        throw new NotFoundException('Step not found');
       }
-      this.logger.log('Step found', FindStepRepository.name);
-      return stepExist;
+      this.logger.log('Step found', FindStepByIdUseCase.name);
+      return step;
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
-        description: 'Error finding Step',
+        description: 'Error finding step',
       });
-      this.logger.error(err.message);
+      this.logger.error(error.message);
       throw err;
     }
   }

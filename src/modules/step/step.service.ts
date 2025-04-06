@@ -16,11 +16,11 @@ export class StepService {
     private readonly DeleteStepUseCase: DeleteStepUseCase,
   ) {}
   async create(data: CreateStepDto) {
-    return await this.CreateStepUseCase.createStep(data);
+    return await this.CreateStepUseCase.execute(data);
   }
 
   async findAll() {
-    return await this.FindAllStepsUseCase.findAll();
+    return await this.FindAllStepsUseCase.execute();
   }
 
   async findOne(id: string) {

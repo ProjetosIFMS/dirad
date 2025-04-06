@@ -5,11 +5,10 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class DeleteStepRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async deleteStep(id: string) {
+  async delete(id: string) {
     const step = await this.prisma.step.delete({
       where: { id },
     });
-
     return step;
   }
 }
