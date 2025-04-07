@@ -5,19 +5,18 @@ import {
 } from '@nestjs/common';
 import { CreateUnitRepository } from '../repository';
 import { CreateUnitDto } from '../dto/create-unit.dto';
-import { CreateActivityUseCase } from 'src/activity/use-cases';
 
 @Injectable()
 export class CreateUnitUseCase {
   constructor(
-    private readonly CreateUnitRepository: CreateUnitRepository,
+    private readonly UnitRepository: CreateUnitRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async createUnit(data: CreateUnitDto) {
+  async execute(data: CreateUnitDto) {
     try {
-      const unit = await this.CreateUnitRepository.create(data);
-      this.logger.log('Unit Created', CreateActivityUseCase);
+      const unit = await this.UnitRepository.create(data);
+      this.logger.log('Unit Created', CreateUnitUseCase.name);
       return unit;
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {

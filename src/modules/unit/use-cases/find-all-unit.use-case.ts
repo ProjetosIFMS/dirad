@@ -8,19 +8,19 @@ import { FindAllUnitRepository } from '../repository';
 @Injectable()
 export class FindAllUnitUseCase {
   constructor(
-    private readonly FindAllUnitRepository: FindAllUnitRepository,
+    private readonly UnitRepository: FindAllUnitRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async findAll() {
+  async execute() {
     try {
-      return await this.FindAllUnitRepository.FindAllUnit();
+      return await this.UnitRepository.findAll();
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error finding Unit',
       });
-      this.logger.error(err);
+      this.logger.error(error.message);
       throw err;
     }
   }
