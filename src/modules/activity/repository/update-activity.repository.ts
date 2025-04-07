@@ -6,7 +6,7 @@ import { UpdateActivityDto } from '../dto/update-activity.dto';
 export class UpdateActivityRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async updateActivity(id: string, data: UpdateActivityDto) {
+  async update(id: string, data: UpdateActivityDto) {
     const activity = await this.prisma.activity.update({
       where: { id },
       data,
