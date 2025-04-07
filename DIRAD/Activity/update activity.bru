@@ -1,0 +1,18 @@
+meta {
+  name: update activity
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{base_url}}/activity/cm96fthr10000h0f4g652fj0p
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"teste 45",
+    "description":"teste 33 desc."
+  }
+}
