@@ -31,7 +31,7 @@ export class DeleteUnitUseCase {
         description: 'Error deleting unit',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }
