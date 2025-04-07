@@ -5,32 +5,28 @@ import {
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { FindUnitByIdRepository } from '../repository';
-import { FindAllActivityRepository } from 'src/modules/activity/repository';
 
 @Injectable()
 export class FindUnitByIdUseCase {
   constructor(
-    private readonly findUnitByIdRepository: FindUnitByIdRepository,
+    private readonly UnitRepository: FindUnitByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async findById(id: string) {
+  async execute(id: string) {
     try {
-      const unitExist = await this.findUnitByIdRepository.FindUnitById(id);
-
+      const unitExist = await this.UnitRepository.findById(id);
       if (!unitExist) {
-        const error = new NotFoundException('Unit not found');
-        this.logger.error(error.message);
-        throw error;
+        throw new NotFoundException('Unit not found');
       }
-      this.logger.log('Unit Found', FindAllActivityRepository.name);
+      this.logger.log('Unit Found', FindUnitByIdUseCase.name);
       return unitExist;
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error finding Unit',
       });
-      this.logger.error(err.message);
+      this.logger.error(error.message);
       throw err;
     }
   }
