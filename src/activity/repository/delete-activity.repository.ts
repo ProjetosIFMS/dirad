@@ -5,7 +5,7 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class DeleteActivityRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async deleteActivity(id: string) {
+  async delete(id: string) {
     const activity = await this.prisma.activity.delete({
       where: { id },
     });

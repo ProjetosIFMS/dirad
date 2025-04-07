@@ -8,19 +8,19 @@ import { FindAllActivityRepository } from '../repository/find-all-activity.repos
 @Injectable()
 export class FindAllActivityUseCase {
   constructor(
-    private readonly FindAllActivityRepository: FindAllActivityRepository,
+    private readonly ActivityRepository: FindAllActivityRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async findAll() {
+  async execute() {
     try {
-      return await this.FindAllActivityRepository.FindAllActivity();
+      return await this.ActivityRepository.findAll();
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error Finding Actitivity',
       });
-      this.logger.error(err);
+      this.logger.error(error.message);
       throw err;
     }
   }

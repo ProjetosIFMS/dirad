@@ -5,7 +5,7 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class FindAllActivityRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async FindAllActivity() {
+  async findAll() {
     return await this.prisma.activity.findMany();
   }
 }

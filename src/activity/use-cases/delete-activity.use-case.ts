@@ -6,36 +6,34 @@ import {
 } from '@nestjs/common';
 import {
   DeleteActivityRepository,
-  FindActivityRepository,
+  FindActivityByIdRepository,
 } from '../repository';
 
 @Injectable()
 export class DeleteActivityUseCase {
   constructor(
-    private readonly DeleteActivityRepository: DeleteActivityRepository,
-    private readonly findActivityRepository: FindActivityRepository,
+    private readonly ActivityRepository: DeleteActivityRepository,
+    private readonly findActivityByIdRepository: FindActivityByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
 
   async execute(id: string) {
     try {
-      const activityExist =
-        await this.findActivityRepository.FindActivityById(id);
-
+      const activityExist = await this.findActivityByIdRepository.findById(id);
       if (!activityExist) {
-        const error = new NotFoundException('Activity not found');
-        this.logger.error(error.message);
-        throw error;
+        throw new NotFoundException('Activity not found');
       }
 
-      const activity = await this.DeleteActivityRepository.deleteActivity(id);
-      this.logger.log('Activity Deleted', DeleteActivityRepository.name);
+      const activity = await this.ActivityRepository.delete(id);
+      this.logger.log('Activity Deleted', DeleteActivityUseCase.name);
       return activity;
     } catch (err) {
-      new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error Deleting Activity',
       });
+      this.logger.error(error.message);
+      throw error;
     }
   }
 }

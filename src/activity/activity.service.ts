@@ -20,11 +20,11 @@ export class ActivityService {
   ) {}
 
   async create(data: CreateActivityDto) {
-    return await this.CreateActivityUseCase.createActivity(data);
+    return await this.CreateActivityUseCase.execute(data);
   }
 
   async findAll() {
-    return await this.FindAllActivityUseCase.findAll();
+    return await this.FindAllActivityUseCase.execute();
   }
 
   async findOne(id: string) {
