@@ -1,0 +1,17 @@
+meta {
+  name: create checklist
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/checklist
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "processId":"3c9e90a3-2e5f-4f65-9f5a-dc6e3e2a4d48"
+  }
+}
