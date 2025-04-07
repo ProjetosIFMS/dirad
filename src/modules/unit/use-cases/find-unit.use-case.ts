@@ -5,7 +5,7 @@ import {
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { FindUnitByIdRepository } from '../repository';
-import { FindAllActivityRepository } from 'src/activity/repository';
+import { FindAllActivityRepository } from 'src/modules/activity/repository';
 
 @Injectable()
 export class FindUnitByIdUseCase {

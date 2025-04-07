@@ -27,7 +27,7 @@ export class FindActivityByIdUseCase {
         description: 'Error finding Actitivty',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }

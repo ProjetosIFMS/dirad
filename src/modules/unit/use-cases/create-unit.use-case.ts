@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { CreateUnitRepository } from '../repository';
 import { CreateUnitDto } from '../dto/create-unit.dto';
-import { CreateActivityUseCase } from 'src/activity/use-cases';
+import { CreateActivityUseCase } from 'src/modules/activity/use-cases';
 
 @Injectable()
 export class CreateUnitUseCase {
