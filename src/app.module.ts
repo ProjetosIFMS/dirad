@@ -9,7 +9,9 @@ import { AuthService } from './modules/auth/auth.service';
 import { ActivityModule } from './modules/activity/activity.module';
 import { UnitModule } from './modules/unit/unit.module';
 import { ProcessTypeModule } from './modules/process-type/process-type.module';
+import { ParticipatingUnitModule } from './modules/participating-unit/participating-unit.module';
 import { ChecklistModule } from './modules/checklist/checklist.module';
+
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { ChecklistModule } from './modules/checklist/checklist.module';
     ActivityModule,
     UnitModule,
     ProcessTypeModule,
+    ParticipatingUnitModule,
     ChecklistModule,
   ],
   controllers: [AppController],

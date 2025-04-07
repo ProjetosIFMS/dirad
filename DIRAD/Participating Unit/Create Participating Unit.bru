@@ -1,0 +1,18 @@
+meta {
+  name: Create Participating Unit
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/participating-unit/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "unitId": "cm971lzrn0000rbfzxnlcrtqq",
+    "processId": "3c9e90a3-2e5f-4f65-9f5a-dc6e3e2a4d48"
+  }
+}
