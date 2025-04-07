@@ -30,7 +30,7 @@ export class DeleteChecklistUseCase {
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
-        description: 'Error deleting process type',
+        description: 'Error deleting checklist',
       });
       this.logger.error(error.message);
       throw err;
