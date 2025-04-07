@@ -9,6 +9,7 @@ import { AuthService } from './modules/auth/auth.service';
 import { ActivityModule } from './modules/activity/activity.module';
 import { UnitModule } from './modules/unit/unit.module';
 import { ProcessTypeModule } from './modules/process-type/process-type.module';
+import { ChecklistModule } from './modules/checklist/checklist.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ProcessTypeModule } from './modules/process-type/process-type.module';
     ActivityModule,
     UnitModule,
     ProcessTypeModule,
+    ChecklistModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthService, GoogleStrategy, Logger],
