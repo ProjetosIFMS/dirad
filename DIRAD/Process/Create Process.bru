@@ -1,0 +1,33 @@
+meta {
+  name: Create Process
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/process/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "processNumber": "TESTEProcesso01",
+    "costing": 102,
+    "situation": "Em aberto",
+    "estimatedValue": 11.0,
+    "totalValue": 15,
+    "supplierValue": 120.1,
+    "object": "Hello teste",
+    "adictionalInformation": "Olá mundo",
+    "priority": 5,
+    "checklistId": "cm97hhum10003rbj4o0t7boy3",
+    "processTypeId": "cm94yuuag0000sew7rt3bfmz7",
+    "managingUnitId": "cm971lzrn0000rbfzxnlcrtqq",
+    "participatingUnits": [
+     {
+       "participatingUnit": "cm977oxeb0003rblsiw96swdk"}
+    ],
+  }
+  
+}
