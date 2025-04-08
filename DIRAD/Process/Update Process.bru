@@ -1,0 +1,18 @@
+meta {
+  name: Update Process
+  type: http
+  seq: 3
+}
+
+patch {
+  url: {{base_url}}/process/cm97t0e5h0001rb40k6wh0jb4
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "checklistId": "cm97t0nbm0003rb40q371m6dp",
+    "costing": 104
+  }
+}
