@@ -38,7 +38,7 @@ export class DeleteProcessUseCase {
         cause: err,
         description: 'Error deleting process',
       });
-      this.logger.log(error.message);
+      this.logger.error(error.message);
       throw err;
     }
   }

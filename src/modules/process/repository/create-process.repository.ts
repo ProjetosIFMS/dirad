@@ -10,11 +10,9 @@ export class CreateProcessRepository {
     return await this.prisma.process.create({
       data: {
         processNumber: data.processNumber,
-        processType: { connect: { id: data.processTypeId } },
-        managingUnit: { connect: { id: data.managingUnitId } },
-        ...(data.checklistId
-          ? { checklist: { connect: { id: data.checklistId } } }
-          : {}),
+        processTypeId: data.processTypeId,
+        managingUnitId: data.managingUnitId,
+        checklistId: data.checklistId,
         costing: data.costing,
         situation: data.situation,
         estimatedValue: data.estimatedValue,
