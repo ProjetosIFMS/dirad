@@ -141,10 +141,10 @@ model Process {
   id                    String              @id @default(cuid())
   processNumber         String              @unique
   // Relação many-to-one com ProcessType: cada processo tem um único tipo
-  processType           ProcessType         @relation(fields: [processTypeId], references: [id])
+  processType           ProcessType         @relation(fields: [processTypeId], references: [id], onDelete: Cascade)
   processTypeId         String
   // Relação many-to-one com Unit: cada processo é gerenciado por uma única unidade
-  managingUnit          Unit                @relation(fields: [managingUnitId], references: [id])
+  managingUnit          Unit                @relation(fields: [managingUnitId], references: [id], onDelete: Cascade)
   managingUnitId        String
   // Relação one-to-many com ParticipatingUnit: um processo pode ter muitas unidades participantes
   participatingUnits    ParticipatingUnit[]
@@ -156,9 +156,9 @@ model Process {
   object                String
   adictionalInformation String
   priority              Int
-  // Relação one-to-one com Checklist: cada processo tem um único checklist
-  checklist             Checklist?          @relation
-  checklistId           String              @unique
+  // // Relação one-to-one com Checklist: cada processo tem um único checklist
+  checklist             Checklist?          
+  checklistId           String?             @unique
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
 
@@ -168,6 +168,7 @@ model Process {
   @@index([situation])
   @@index([priority])
   @@index([createdAt])
+  
 }
 
 model ParticipatingUnit {
