@@ -11,7 +11,7 @@ import { UnitModule } from './modules/unit/unit.module';
 import { ProcessTypeModule } from './modules/process-type/process-type.module';
 import { ParticipatingUnitModule } from './modules/participating-unit/participating-unit.module';
 import { ChecklistModule } from './modules/checklist/checklist.module';
-
+import { ProcessModule } from './modules/process/process.module';
 
 @Module({
   imports: [
@@ -23,6 +23,7 @@ import { ChecklistModule } from './modules/checklist/checklist.module';
     ProcessTypeModule,
     ParticipatingUnitModule,
     ChecklistModule,
+    ProcessModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthService, GoogleStrategy, Logger],
