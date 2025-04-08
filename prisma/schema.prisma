@@ -101,7 +101,7 @@ model CompletedStep {
 model Checklist {
   id            String          @id @default(cuid())
   // Relação one-to-one com Process: cada checklist pertence a um único processo
-  process       Process         @relation(fields: [processId], references: [id])
+  process       Process         @relation(fields: [processId], references: [id], onDelete: Cascade)
   processId     String          @unique
   // Relação one-to-many com CompletedStep: um checklist pode ter muitos passos completados
   completedStep CompletedStep[]
