@@ -1,0 +1,17 @@
+meta {
+  name: Update Completed Step
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{base_url}}/completed-step/cm99cp9du0005e3owfnqhgqyy
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "status":"CANCELLED"
+  }
+}

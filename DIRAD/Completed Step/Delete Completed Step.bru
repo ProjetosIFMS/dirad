@@ -1,0 +1,17 @@
+meta {
+  name: Delete Completed Step
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{base_url}}/completed-step/cm99cp9du0005e3owfnqhgqyy
+  body: none
+  auth: inherit
+}
+
+body:json {
+  {
+    "status":"CANCELLED"
+  }
+}
