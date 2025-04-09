@@ -1,0 +1,17 @@
+meta {
+  name: List By Id Completed Step
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/completed-step/cm99cp9du0005e3owfnqhgqyy
+  body: none
+  auth: inherit
+}
+
+body:json {
+  {
+    "status":"CANCELLED"
+  }
+}

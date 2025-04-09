@@ -1,0 +1,20 @@
+meta {
+  name: Create Completed
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/completed-step
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "status":"COMPLETED",
+    "stepId":"cm924o7xh0001e3asjp0rz13a",
+    "checklistId":"cm99cmy1a0003e3owzaggukc2",
+    "userId":"cm93aats20000e3h4tflmcwjy"
+  }
+}
