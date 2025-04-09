@@ -1,5 +1,5 @@
 import { IsDateString, IsEnum, IsString, IsUUID } from 'class-validator';
-import { Status } from './Status';
+import { Status } from '../types/Status';
 
 export class CreateCompletedStepDto {
   @IsString()

@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateCompletedStepDto } from './create-completed-step.dto';
 import { IsEnum } from 'class-validator';
-import { Status } from './Status';
+import { Status } from '../types/Status';
 
 export class UpdateCompletedStepDto extends PartialType(
   CreateCompletedStepDto,
