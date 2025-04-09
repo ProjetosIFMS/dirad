@@ -12,6 +12,7 @@ import { ProcessTypeModule } from './modules/process-type/process-type.module';
 import { ParticipatingUnitModule } from './modules/participating-unit/participating-unit.module';
 import { ChecklistModule } from './modules/checklist/checklist.module';
 import { ProcessModule } from './modules/process/process.module';
+import { CompletedStepModule } from './modules/completed-step/completed-step.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ProcessModule } from './modules/process/process.module';
     ParticipatingUnitModule,
     ChecklistModule,
     ProcessModule,
+    CompletedStepModule,
   ],
   controllers: [AppController],
   providers: [AppService, AuthService, GoogleStrategy, Logger],
