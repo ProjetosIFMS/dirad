@@ -13,6 +13,8 @@ import { ParticipatingUnitModule } from './modules/participating-unit/participat
 import { ChecklistModule } from './modules/checklist/checklist.module';
 import { ProcessModule } from './modules/process/process.module';
 import { CompletedStepModule } from './modules/completed-step/completed-step.module';
+import { JwtStrategy } from './shared/strategies/jwt.strategy';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -28,6 +30,13 @@ import { CompletedStepModule } from './modules/completed-step/completed-step.mod
     CompletedStepModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AuthService, GoogleStrategy, Logger],
+  providers: [
+    AppService,
+    JwtService,
+    AuthService,
+    GoogleStrategy,
+    JwtStrategy,
+    Logger,
+  ],
 })
 export class AppModule {}
