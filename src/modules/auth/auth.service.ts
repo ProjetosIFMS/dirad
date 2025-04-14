@@ -1,18 +1,41 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import axios from 'axios';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly logger: Logger) {}
+  constructor(
+    private readonly logger: Logger,
+    private readonly jwtService: JwtService,
+  ) {}
+
+  generateJwt(user: any) {
+    const payload = {
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      picture: user.picture,
+    };
+    return this.jwtService.sign(payload);
+  }
 
   googleLogin(req) {
     if (!req.user) {
       return 'No user from google';
     }
 
+    const payload = {
+      email: req.user.email,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      picture: req.user.picture,
+    };
+
     return {
-      message: 'User information from google',
-      user: req.user,
+      message: 'User information',
+      user: {
+        ...payload,
+      },
     };
   }
 
