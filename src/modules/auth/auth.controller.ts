@@ -2,8 +2,6 @@ import { Controller, Get, UseGuards, Req, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { RequestUser } from './types/user';
-import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -15,21 +13,11 @@ export class AuthController {
 
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Req() req: RequestUser, @Res() res: Response) {
+  googleAuthRedirect(@Req() req, @Res() res) {
+    this.authService.generateJwt(req.user);
     const user = req.user;
-    const access_token = this.authService.generateJwt(user);
-
-    const isValidToken =
-      await this.authService.validateGoogleAccessToken(access_token);
-
-    if (!isValidToken) {
-      return res.status(401).json({
-        message: 'Invalid Google access token',
-      });
-    }
-
-    const redirectUrl = `${process.env.FRONTEND_URL}?access_token=${access_token}`;
-    return res.redirect(redirectUrl);
+    const accessToken = this.authService.generateJwt(user);
+    res.redirect(`${process.env.FRONTEND_URL}${accessToken}`);
   }
 
   @Get('me')
