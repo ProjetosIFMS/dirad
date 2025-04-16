@@ -140,12 +140,16 @@ model ProcessType {
 model Process {
   id                    String              @id @default(cuid())
   processNumber         String              @unique
+  objectDescription     String?
   // Relação many-to-one com ProcessType: cada processo tem um único tipo
   processType           ProcessType         @relation(fields: [processTypeId], references: [id], onDelete: Cascade)
   processTypeId         String
   // Relação many-to-one com Unit: cada processo é gerenciado por uma única unidade
   managingUnit          Unit                @relation(fields: [managingUnitId], references: [id], onDelete: Cascade)
   managingUnitId        String
+  // Relação many-to-one com Modality: cada processo tem uma única modalidade
+  modalityId            String
+  modality              Modality            @relation(fields: [modalityId], references: [id])
   // Relação one-to-many com ParticipatingUnit: um processo pode ter muitas unidades participantes
   participatingUnits    ParticipatingUnit[]
   costing               Float
@@ -157,7 +161,7 @@ model Process {
   adictionalInformation String
   priority              Int
   // // Relação one-to-one com Checklist: cada processo tem um único checklist
-  checklist             Checklist?          
+  checklist             Checklist?
   checklistId           String?             @unique
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
@@ -168,7 +172,14 @@ model Process {
   @@index([situation])
   @@index([priority])
   @@index([createdAt])
-  
+}
+
+model Modality {
+  id        String    @id @default(uuid())
+  name      String
+  processes Process[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model ParticipatingUnit {
