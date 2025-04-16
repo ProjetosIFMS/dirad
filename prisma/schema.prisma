@@ -114,7 +114,8 @@ model Checklist {
 model Unit {
   id                 String              @id @default(cuid())
   name               String
-  description        String
+  color              String
+  shortName          String
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   // Relação one-to-many com Process: uma unidade pode gerenciar muitos processos

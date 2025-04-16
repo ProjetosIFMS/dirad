@@ -9,7 +9,10 @@ export class CreateUnitDto {
   name: string;
 
   @IsString()
-  description: string;
+  color: string;
+
+  @IsString()
+  shortName: string;
 
   @IsDateString()
   createdAt: Date;

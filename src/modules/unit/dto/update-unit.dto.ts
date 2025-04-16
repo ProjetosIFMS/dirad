@@ -7,5 +7,8 @@ export class UpdateUnitDto extends PartialType(CreateUnitDto) {
   name: string;
 
   @IsString()
-  description: string;
+  color: string;
+
+  @IsString()
+  shortName: string;
 }

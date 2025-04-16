@@ -1,7 +1,6 @@
 import {
   Injectable,
   Logger,
-  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { FindModalityRepository } from '../repository/find-modality.repository';
@@ -16,9 +15,6 @@ export class FindModalityUseCase {
   async execute() {
     try {
       const modality = await this.ModalityRepository.findAllModality();
-      if (!modality) {
-        throw new NotFoundException('Modality not found');
-      }
       this.logger.log('Modality found', FindModalityUseCase.name);
       return modality;
     } catch (err) {
