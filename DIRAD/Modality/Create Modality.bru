@@ -1,0 +1,17 @@
+meta {
+  name: Create Modality
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/modality
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"Modality 1"
+  }
+}
