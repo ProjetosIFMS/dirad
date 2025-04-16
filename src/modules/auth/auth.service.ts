@@ -11,6 +11,7 @@ export class AuthService {
 
   generateJwt(user: any) {
     const payload = {
+      sub: user.id,
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -21,24 +22,22 @@ export class AuthService {
 
   googleLogin(req) {
     if (!req.user) {
-      return 'No user from google';
+      return 'No user from Google';
     }
 
     const payload = {
-      email: req.user.email,
+      sub: req.user.id,
+      username: req.user.email,
       firstName: req.user.firstName,
       lastName: req.user.lastName,
       picture: req.user.picture,
     };
 
     return {
-      message: 'User information',
-      user: {
-        ...payload,
-      },
+      user: req.user,
+      access_token: this.jwtService.sign(payload),
     };
   }
-
   async validateGoogleAccessToken(accessToken: string): Promise<any> {
     const googleUserInfoUrl = process.env.GOOGLE_USERINFO_URL;
 
