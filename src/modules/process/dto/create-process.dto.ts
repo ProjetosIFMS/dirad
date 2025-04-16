@@ -19,8 +19,15 @@ export class CreateProcessDto {
   processNumber: string;
 
   @IsString()
+  objectDescription: string;
+
+  @IsString()
   @IsUUID()
   processTypeId: string;
+
+  @IsString()
+  @IsUUID()
+  modalityId: string;
 
   @IsString()
   @IsUUID()

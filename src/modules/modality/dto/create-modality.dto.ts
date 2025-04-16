@@ -1,18 +1,11 @@
 import { IsDateString, IsString, IsUUID } from 'class-validator';
 
-export class CreateUnitDto {
-  @IsString()
+export class CreateModalityDto {
   @IsUUID()
   id: string;
 
   @IsString()
   name: string;
-
-  @IsString()
-  color: string;
-
-  @IsString()
-  shortName: string;
 
   @IsDateString()
   createdAt: Date;
