@@ -50,6 +50,9 @@ export class CreateProcessDto {
   object: string;
 
   @IsString()
+  objectDescription: string;
+
+  @IsString()
   adictionalInformation: string;
 
   @IsNumber()

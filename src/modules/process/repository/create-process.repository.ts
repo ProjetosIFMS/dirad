@@ -19,6 +19,7 @@ export class CreateProcessRepository {
         totalValue: data.totalValue,
         supplierValue: data.supplierValue,
         object: data.object,
+        objectDescription: data.objectDescription,
         adictionalInformation: data.adictionalInformation,
         priority: data.priority,
       },

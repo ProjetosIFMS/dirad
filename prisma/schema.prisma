@@ -154,10 +154,11 @@ model Process {
   totalValue            Float
   supplierValue         Float
   object                String
+  objectDescription     String
   adictionalInformation String
   priority              Int
   // // Relação one-to-one com Checklist: cada processo tem um único checklist
-  checklist             Checklist?          
+  checklist             Checklist?
   checklistId           String?             @unique
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
@@ -168,7 +169,6 @@ model Process {
   @@index([situation])
   @@index([priority])
   @@index([createdAt])
-  
 }
 
 model ParticipatingUnit {

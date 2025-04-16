@@ -45,6 +45,9 @@ export class UpdateProcessDto {
   object: string;
 
   @IsString()
+  objectDescription: string;
+
+  @IsString()
   adictionalInformation: string;
 
   @IsNumber()

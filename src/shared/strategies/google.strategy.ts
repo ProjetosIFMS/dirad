@@ -1,13 +1,10 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
-import { config } from 'dotenv';
 
 import { Injectable } from '@nestjs/common';
 import { AuthService } from '../../modules/auth/auth.service';
 import { CreateUserRepository } from '../../modules/user/repository/create-user.repository';
 import { FindUserByEmailRepository } from '../../modules/user/repository/find-user-by-email.repository';
-
-config();
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
