@@ -15,6 +15,7 @@ import { ProcessModule } from './modules/process/process.module';
 import { CompletedStepModule } from './modules/completed-step/completed-step.module';
 import { JwtStrategy } from './shared/strategies/jwt.strategy';
 import { JwtService } from '@nestjs/jwt';
+import { ModalityModule } from './modules/modality/modality.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { JwtService } from '@nestjs/jwt';
     ChecklistModule,
     ProcessModule,
     CompletedStepModule,
+    ModalityModule,
   ],
   controllers: [AppController],
   providers: [
