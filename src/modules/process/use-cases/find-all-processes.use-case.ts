@@ -1,7 +1,6 @@
 import {
   Injectable,
   Logger,
-  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { FindAllProcessesRepository } from '../repository';
@@ -16,11 +15,6 @@ export class FindAllProcessesUseCase {
   async execute() {
     try {
       const processes = await this.findAllProcessesRepository.findProcesses();
-
-      if (processes.length === 0) {
-        this.logger.error('Process not found', FindAllProcessesUseCase.name);
-        throw new NotFoundException('Not found any process');
-      }
 
       this.logger.log('Processes found', FindAllProcessesUseCase.name);
 

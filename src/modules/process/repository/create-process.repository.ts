@@ -10,7 +10,6 @@ export class CreateProcessRepository {
     return await this.prisma.process.create({
       data: {
         processNumber: data.processNumber,
-        objectDescription: data.objectDescription,
         processTypeId: data.processTypeId,
         managingUnitId: data.managingUnitId,
         modalityId: data.modalityId,
@@ -21,6 +20,7 @@ export class CreateProcessRepository {
         totalValue: data.totalValue,
         supplierValue: data.supplierValue,
         object: data.object,
+        objectDescription: data.objectDescription,
         adictionalInformation: data.adictionalInformation,
         priority: data.priority,
       },

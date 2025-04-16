@@ -19,9 +19,6 @@ export class CreateProcessDto {
   processNumber: string;
 
   @IsString()
-  objectDescription: string;
-
-  @IsString()
   @IsUUID()
   processTypeId: string;
 
@@ -55,6 +52,9 @@ export class CreateProcessDto {
 
   @IsString()
   object: string;
+
+  @IsString()
+  objectDescription: string;
 
   @IsString()
   adictionalInformation: string;

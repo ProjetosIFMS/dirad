@@ -9,6 +9,7 @@ const repositories = Object.values(Repositories);
 
 @Module({
   controllers: [ChecklistController],
+  exports: [...repositories],
   providers: [ChecklistService, ...useCases, ...repositories, Logger],
 })
 export class ChecklistModule {}

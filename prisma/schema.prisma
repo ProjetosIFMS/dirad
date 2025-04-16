@@ -141,7 +141,7 @@ model ProcessType {
 model Process {
   id                    String              @id @default(cuid())
   processNumber         String              @unique
-  objectDescription     String?
+  objectDescription     String
   // Relação many-to-one com ProcessType: cada processo tem um único tipo
   processType           ProcessType         @relation(fields: [processTypeId], references: [id], onDelete: Cascade)
   processTypeId         String
