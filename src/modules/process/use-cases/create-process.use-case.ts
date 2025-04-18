@@ -63,7 +63,7 @@ export class CreateProcessUseCase {
         description: 'Error creating process',
       });
       this.logger.error(error.message, CreateProcessUseCase.name);
-      throw err;
+      throw error;
     }
   }
 }

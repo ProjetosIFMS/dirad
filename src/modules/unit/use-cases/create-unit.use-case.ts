@@ -6,9 +6,6 @@ import {
 import { CreateUnitRepository } from '../repository';
 import { CreateUnitDto } from '../dto/create-unit.dto';
 
-import { CreateActivityUseCase } from 'src/modules/activity/use-cases';
-
-
 @Injectable()
 export class CreateUnitUseCase {
   constructor(
@@ -27,7 +24,7 @@ export class CreateUnitUseCase {
         description: 'Error creating Unit',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }

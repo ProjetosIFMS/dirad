@@ -29,7 +29,7 @@ export class CreateParticipatingUnitUseCase {
         description: 'Error creating Participating Unit',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }
