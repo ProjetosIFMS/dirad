@@ -24,7 +24,7 @@ export class CreateProcessTypeUseCase {
         description: 'Error creating process type',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }

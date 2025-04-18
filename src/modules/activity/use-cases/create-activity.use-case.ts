@@ -24,7 +24,7 @@ export class CreateActivityUseCase {
         description: 'Error creating Activity',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }

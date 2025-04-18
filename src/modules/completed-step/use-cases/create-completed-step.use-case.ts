@@ -24,7 +24,7 @@ export class CreateCompletedStepUseCase {
         description: 'Error creating Created Step',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }

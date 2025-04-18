@@ -24,7 +24,7 @@ export class CreateChecklistUseCase {
         description: 'Error creating checklist',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }

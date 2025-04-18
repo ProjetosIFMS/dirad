@@ -24,7 +24,7 @@ export class CreateModalityUseCase {
         description: 'Error creating Modality',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }
