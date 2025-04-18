@@ -7,9 +7,6 @@ export class UpdateProcessTypeDto {
   @IsString()
   name: string;
 
-  @IsString()
-  description: string;
-
   @IsDateString()
   createdAt: Date;
 
