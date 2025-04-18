@@ -71,8 +71,10 @@ model Step {
   activityId    String
   // Relação one-to-many com CompletedStep: um passo pode ter muitas instâncias completadas
   completedStep CompletedStep[]
+  modalityId    String
+  modality      Modality        @relation(fields: [modalityId], references: [id])
 
-  @@index([activityId])
+  @@index([activityId, modalityId])
   @@index([status])
   @@index([deadline])
 }
@@ -181,6 +183,11 @@ model Modality {
   processes Process[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  steps     Step[]
+
+  @@index([name])
+  @@index([createdAt])
+  @@index([updatedAt])
 }
 
 model ParticipatingUnit {
