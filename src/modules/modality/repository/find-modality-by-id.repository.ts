@@ -8,6 +8,9 @@ export class FindModalityByIdRepository {
   async findModalityById(id: string) {
     return await this.prisma.modality.findUnique({
       where: { id },
+      include: {
+        steps: true,
+      },
     });
   }
 }
