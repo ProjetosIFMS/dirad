@@ -24,4 +24,7 @@ export class CreateStepDto {
 
   @IsString()
   activityId: string;
+
+  @IsString()
+  modalityId: string;
 }

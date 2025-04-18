@@ -6,6 +6,10 @@ export class FindModalityRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAllModality() {
-    return await this.prisma.modality.findMany();
+    return await this.prisma.modality.findMany({
+      include: {
+        steps: true,
+      },
+    });
   }
 }
