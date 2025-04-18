@@ -21,4 +21,7 @@ export class UpdateStepDto {
 
   @IsString()
   activityId: string;
+
+  @IsString()
+  modalityId: string;
 }
