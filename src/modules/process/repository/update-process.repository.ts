@@ -7,23 +7,46 @@ export class UpdateProcessRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async updateProcess(id: string, data: UpdateProcessDto) {
-    return await this.prisma.process.update({
+    const {
+      processTypeId,
+      executingUnitId,
+      modalityId,
+      participatingUnits,
+      checklistId,
+      ...directFields
+    } = data;
+
+    const dataObj = {
+      ...directFields,
+      checklistId: checklistId,
+      ...(processTypeId && {
+        processType: { connect: { id: processTypeId } },
+      }),
+      ...(executingUnitId && {
+        executingUnit: { connect: { id: executingUnitId } },
+      }),
+      ...(modalityId && {
+        modality: { connect: { id: modalityId } },
+      }),
+    };
+    const updatedProcess = await this.prisma.process.update({
       where: { id },
       data: {
-        processNumber: data.processNumber,
-        processTypeId: data.processTypeId,
-        managingUnitId: data.managingUnitId,
-        checklistId: data.checklistId,
-        costing: data.costing,
-        situation: data.situation,
-        estimatedValue: data.estimatedValue,
-        totalValue: data.totalValue,
-        supplierValue: data.supplierValue,
-        object: data.object,
-        objectDescription: data.objectDescription,
-        adictionalInformation: data.adictionalInformation,
-        priority: data.priority,
+        ...dataObj,
+        participatingUnits: {
+          deleteMany: {
+            processId: id,
+          },
+          create: participatingUnits.map((unit) => ({
+            unitId: unit,
+          })),
+        },
+      },
+      include: {
+        participatingUnits: true,
       },
     });
+
+    return updatedProcess;
   }
 }

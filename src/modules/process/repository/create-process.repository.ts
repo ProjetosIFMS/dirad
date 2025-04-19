@@ -5,24 +5,30 @@ import { CreateProcessDto } from '../dto/create-process.dto';
 @Injectable()
 export class CreateProcessRepository {
   constructor(private readonly prisma: PrismaService) {}
-
   async createProcess(data: CreateProcessDto) {
+    const {
+      processTypeId,
+      participatingUnits,
+      executingUnitId,
+      modalityId,
+      ...processData
+    } = data;
+
     return await this.prisma.process.create({
       data: {
-        processNumber: data.processNumber,
-        processTypeId: data.processTypeId,
-        managingUnitId: data.managingUnitId,
-        modalityId: data.modalityId,
-        checklistId: data.checklistId,
-        costing: data.costing,
-        situation: data.situation,
-        estimatedValue: data.estimatedValue,
-        totalValue: data.totalValue,
-        supplierValue: data.supplierValue,
-        object: data.object,
-        objectDescription: data.objectDescription,
-        adictionalInformation: data.adictionalInformation,
-        priority: data.priority,
+        processTypeId,
+        executingUnitId,
+        modalityId,
+        ...processData,
+        ...(participatingUnits && participatingUnits.length > 0
+          ? {
+              participatingUnits: {
+                create: participatingUnits.map((unitId) => ({
+                  unitId,
+                })),
+              },
+            }
+          : {}),
       },
     });
   }

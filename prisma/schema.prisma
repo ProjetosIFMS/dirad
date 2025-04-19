@@ -129,12 +129,12 @@ model Unit {
 }
 
 model ProcessType {
-  id          String    @id @default(cuid())
-  name        String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id        String    @id @default(cuid())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   // Relação one-to-many com Process: um tipo de processo pode ter muitos processos
-  processes   Process[]
+  processes Process[]
 
   @@index([name])
 }
@@ -147,8 +147,8 @@ model Process {
   processType           ProcessType         @relation(fields: [processTypeId], references: [id], onDelete: Cascade)
   processTypeId         String
   // Relação many-to-one com Unit: cada processo é gerenciado por uma única unidade
-  managingUnit          Unit                @relation(fields: [managingUnitId], references: [id], onDelete: Cascade)
-  managingUnitId        String
+  executingUnit         Unit                @relation(fields: [executingUnitId], references: [id], onDelete: Cascade)
+  executingUnitId       String
   // Relação many-to-one com Modality: cada processo tem uma única modalidade
   modalityId            String
   modality              Modality            @relation(fields: [modalityId], references: [id])
@@ -162,15 +162,18 @@ model Process {
   object                String
   adictionalInformation String
   priority              Int
-  // // Relação one-to-one com Checklist: cada processo tem um único checklist
-  checklist             Checklist?
-  checklistId           String?             @unique
+  startDate             DateTime            @default(now())
+  expectedEndDate       DateTime
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
 
+  // // Relação one-to-one com Checklist: cada processo tem um único checklist
+  checklist   Checklist?
+  checklistId String?    @unique
+
   @@index([processNumber])
   @@index([processTypeId])
-  @@index([managingUnitId])
+  @@index([executingUnitId])
   @@index([situation])
   @@index([priority])
   @@index([createdAt])
@@ -195,7 +198,7 @@ model ParticipatingUnit {
   unit      Unit     @relation(fields: [unitId], references: [id])
   unitId    String
   // Relação many-to-one com Process: cada participação está associada a um único processo
-  process   Process  @relation(fields: [processId], references: [id])
+  process   Process  @relation(fields: [processId], references: [id], onDelete: Cascade)
   processId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
