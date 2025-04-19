@@ -62,8 +62,8 @@ export class UpdateProcessDto {
   checklistId?: string;
 
   @IsDateString()
-  expectedEndDate?: string;
+  expectedEndDate?: Date;
 
   @IsDateString()
-  updatedAt?: string;
+  updatedAt?: Date;
 }

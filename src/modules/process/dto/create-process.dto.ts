@@ -24,11 +24,11 @@ export class CreateProcessDto {
 
   @IsString()
   @IsUUID()
-  modalityId: string;
+  executingUnitId: string;
 
   @IsString()
   @IsUUID()
-  executingUnitId: string;
+  modalityId: string;
 
   @IsArray()
   @ValidateNested({ each: true })
