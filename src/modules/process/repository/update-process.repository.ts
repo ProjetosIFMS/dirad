@@ -12,7 +12,7 @@ export class UpdateProcessRepository {
       data: {
         processNumber: data.processNumber,
         processTypeId: data.processTypeId,
-        managingUnitId: data.managingUnitId,
+        executingUnitId: data.executingUnitId,
         checklistId: data.checklistId,
         costing: data.costing,
         situation: data.situation,
@@ -23,6 +23,7 @@ export class UpdateProcessRepository {
         objectDescription: data.objectDescription,
         adictionalInformation: data.adictionalInformation,
         priority: data.priority,
+        expectedEndDate: data.expectedEndDate,
       },
     });
   }

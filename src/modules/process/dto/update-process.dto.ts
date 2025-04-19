@@ -11,52 +11,59 @@ import { ParticipatingUnit } from 'src/modules/participating-unit/types/particip
 
 export class UpdateProcessDto {
   @IsString()
-  processNumber: string;
+  processNumber?: string;
 
   @IsString()
   @IsUUID()
-  processTypeId: string;
+  processTypeId?: string;
 
   @IsString()
   @IsUUID()
-  managingUnitId: string;
+  executingUnitId?: string;
+
+  @IsString()
+  @IsUUID()
+  modalityId?: string;
 
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ParticipatingUnit)
-  participatingUnits: ParticipatingUnit[];
+  participatingUnits?: ParticipatingUnit[];
 
   @IsNumber()
-  costing: number;
+  costing?: number;
 
   @IsString()
-  situation: string;
+  situation?: string;
 
   @IsNumber()
-  estimatedValue: number;
+  estimatedValue?: number;
 
   @IsNumber()
-  totalValue: number;
+  totalValue?: number;
 
   @IsNumber()
-  supplierValue: number;
+  supplierValue?: number;
 
   @IsString()
-  object: string;
+  object?: string;
 
   @IsString()
-  objectDescription: string;
+  objectDescription?: string;
 
   @IsString()
-  adictionalInformation: string;
+  adictionalInformation?: string;
 
   @IsNumber()
-  priority: number;
+  priority?: number;
 
   @IsString()
   @IsUUID()
-  checklistId: string;
+  checklistId?: string;
 
   @IsDateString()
-  updatedAt: string;
+  expectedEndDate?: string;
+
+  @IsDateString()
+  updatedAt?: string;
 }

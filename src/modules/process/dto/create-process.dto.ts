@@ -28,12 +28,12 @@ export class CreateProcessDto {
 
   @IsString()
   @IsUUID()
-  managingUnitId: string;
+  executingUnitId: string;
 
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ParticipatingUnit)
-  participatingUnits: ParticipatingUnit[];
+  participatingUnits?: ParticipatingUnit['id'][];
 
   @IsNumber()
   costing: number;
@@ -68,8 +68,12 @@ export class CreateProcessDto {
   checklistId?: string;
 
   @IsDateString()
+  startDate: Date;
+
+  @IsDateString()
+  @IsOptional()
   createdAt: Date;
 
   @IsDateString()
-  updatedAt: Date;
+  expectedEndDate: Date;
 }
