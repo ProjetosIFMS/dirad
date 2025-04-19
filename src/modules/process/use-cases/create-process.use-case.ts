@@ -70,7 +70,6 @@ export class CreateProcessUseCase {
         await this.updateProcessRepository.updateProcess(createdProcess.id, {
           checklistId: processChecklist.id,
         });
-
       this.logger.log('Process created', CreateProcessUseCase.name);
 
       return processWithChecklist;

@@ -28,7 +28,7 @@ export class UpdateProcessDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ParticipatingUnit)
-  participatingUnits?: ParticipatingUnit[];
+  participatingUnits?: ParticipatingUnit['id'][];
 
   @IsNumber()
   costing?: number;
