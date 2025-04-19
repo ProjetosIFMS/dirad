@@ -198,7 +198,7 @@ model ParticipatingUnit {
   unit      Unit     @relation(fields: [unitId], references: [id])
   unitId    String
   // Relação many-to-one com Process: cada participação está associada a um único processo
-  process   Process  @relation(fields: [processId], references: [id])
+  process   Process  @relation(fields: [processId], references: [id], onDelete: Cascade)
   processId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
