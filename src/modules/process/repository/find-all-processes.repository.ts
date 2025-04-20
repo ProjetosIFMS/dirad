@@ -19,7 +19,11 @@ export class FindAllProcessesRepository {
         include: {
           processType: true,
           executingUnit: true,
-          participatingUnits: true,
+          participatingUnits: {
+            include: {
+              unit: true,
+            },
+          },
           modality: true,
         },
         orderBy: {
