@@ -7,11 +7,12 @@ import {
   Param,
   Delete,
   Query,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ProcessService } from './process.service';
 import { CreateProcessDto } from './dto/create-process.dto';
 import { UpdateProcessDto } from './dto/update-process.dto';
-import { ProcessPaginationResult } from '../../shared/interfaces/paginate';
 
 @Controller('process')
 export class ProcessController {
@@ -23,13 +24,12 @@ export class ProcessController {
   }
 
   @Get()
-  async findAll(
-    @Query('page') page: number,
-    @Query('perPage') perPage: number,
-  ): Promise<ProcessPaginationResult> {
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('perPage', new DefaultValuePipe(10), ParseIntPipe) perPage: number,
+  ) {
     return this.processService.findAll(page, perPage);
   }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.processService.findOne(id);
