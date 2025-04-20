@@ -29,19 +29,26 @@ export class UpdateProcessRepository {
         modality: { connect: { id: modalityId } },
       }),
     };
+
+    const updateData = {
+      ...dataObj,
+      participatingUnits: {
+        deleteMany: {
+          processId: id,
+        },
+        ...(participatingUnits && participatingUnits.length > 0
+          ? {
+              create: participatingUnits.map((unit) => ({
+                unitId: unit,
+              })),
+            }
+          : {}),
+      },
+    };
+
     const updatedProcess = await this.prisma.process.update({
       where: { id },
-      data: {
-        ...dataObj,
-        participatingUnits: {
-          deleteMany: {
-            processId: id,
-          },
-          create: participatingUnits.map((unit) => ({
-            unitId: unit,
-          })),
-        },
-      },
+      data: updateData,
       include: {
         participatingUnits: true,
       },
