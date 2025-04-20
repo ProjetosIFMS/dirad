@@ -10,6 +10,16 @@ export class FindProcessByIdRepository {
       where: {
         id: process_id,
       },
+      include: {
+        processType: true,
+        executingUnit: true,
+        modality: true,
+        participatingUnits: {
+          include: {
+            unit: true,
+          },
+        },
+      },
     });
   }
 }
