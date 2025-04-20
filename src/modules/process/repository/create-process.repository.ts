@@ -20,15 +20,14 @@ export class CreateProcessRepository {
         executingUnitId,
         modalityId,
         ...processData,
-        ...(participatingUnits && participatingUnits.length > 0
-          ? {
-              participatingUnits: {
-                create: participatingUnits.map((unitId) => ({
-                  unitId,
-                })),
-              },
-            }
-          : {}),
+        participatingUnits: {
+          create: participatingUnits?.map((unitId) => ({
+            unitId,
+          })),
+        },
+      },
+      include: {
+        participatingUnits: true,
       },
     });
   }

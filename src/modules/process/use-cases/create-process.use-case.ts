@@ -69,6 +69,7 @@ export class CreateProcessUseCase {
       const processWithChecklist =
         await this.updateProcessRepository.updateProcess(createdProcess.id, {
           checklistId: processChecklist.id,
+          participatingUnits: data.participatingUnits,
         });
       this.logger.log('Process created', CreateProcessUseCase.name);
 

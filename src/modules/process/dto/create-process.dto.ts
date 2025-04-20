@@ -5,10 +5,7 @@ import {
   IsOptional,
   IsString,
   IsUUID,
-  ValidateNested,
 } from 'class-validator';
-import { ParticipatingUnit } from 'src/modules/participating-unit/types/participating-unit';
-import { Type } from 'class-transformer';
 
 export class CreateProcessDto {
   @IsString()
@@ -31,9 +28,8 @@ export class CreateProcessDto {
   modalityId: string;
 
   @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => ParticipatingUnit)
-  participatingUnits?: ParticipatingUnit['id'][];
+  @IsUUID(undefined, { each: true })
+  participatingUnits?: string[];
 
   @IsNumber()
   costing: number;
