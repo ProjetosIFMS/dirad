@@ -32,18 +32,16 @@ export class UpdateProcessRepository {
 
     const updateData = {
       ...dataObj,
-      participatingUnits: {
-        deleteMany: {
-          processId: id,
+      ...(participatingUnits && {
+        participatingUnits: {
+          deleteMany: {
+            processId: id,
+          },
+          create: participatingUnits.map((unitId) => ({
+            unitId,
+          })),
         },
-        ...(participatingUnits && participatingUnits.length > 0
-          ? {
-              create: participatingUnits.map((unit) => ({
-                unitId: unit,
-              })),
-            }
-          : {}),
-      },
+      }),
     };
 
     const updatedProcess = await this.prisma.process.update({
