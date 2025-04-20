@@ -6,6 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ProcessService } from './process.service';
 import { CreateProcessDto } from './dto/create-process.dto';
@@ -21,10 +24,12 @@ export class ProcessController {
   }
 
   @Get()
-  findAll() {
-    return this.processService.findAll();
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('perPage', new DefaultValuePipe(10), ParseIntPipe) perPage: number,
+  ) {
+    return this.processService.findAll(page, perPage);
   }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.processService.findOne(id);

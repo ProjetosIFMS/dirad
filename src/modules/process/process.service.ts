@@ -21,8 +21,8 @@ export class ProcessService {
     return this.createProcessUseCase.execute(createProcessDto);
   }
 
-  findAll() {
-    return this.findAllProcessesUseCase.execute();
+  findAll(page: number, perPage: number) {
+    return this.findAllProcessesUseCase.execute(page, perPage);
   }
 
   findOne(process_id: string) {

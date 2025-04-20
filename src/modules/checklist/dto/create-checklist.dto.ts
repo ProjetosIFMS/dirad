@@ -2,14 +2,11 @@ import { IsDateString, IsUUID } from 'class-validator';
 
 export class CreateChecklistDto {
   @IsUUID()
-  id: string;
-
-  @IsUUID()
   processId: string;
 
   @IsDateString()
-  createdAt: Date;
+  createdAt?: Date;
 
   @IsDateString()
-  updatedAt: Date;
+  updatedAt?: Date;
 }

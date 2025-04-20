@@ -12,9 +12,12 @@ export class FindAllProcessesUseCase {
     private readonly logger: Logger,
   ) {}
 
-  async execute() {
+  async execute(page: number, perPage: number) {
     try {
-      const processes = await this.findAllProcessesRepository.findProcesses();
+      const processes = await this.findAllProcessesRepository.findProcesses(
+        page,
+        perPage,
+      );
 
       this.logger.log('Processes found', FindAllProcessesUseCase.name);
 
