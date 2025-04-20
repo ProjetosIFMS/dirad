@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ProcessService } from './process.service';
 import { CreateProcessDto } from './dto/create-process.dto';
 import { UpdateProcessDto } from './dto/update-process.dto';
+import { ProcessPaginationResult } from '../../shared/interfaces/paginate';
 
 @Controller('process')
 export class ProcessController {
@@ -21,8 +23,11 @@ export class ProcessController {
   }
 
   @Get()
-  findAll() {
-    return this.processService.findAll();
+  async findAll(
+    @Query('page') page: number,
+    @Query('perPage') perPage: number,
+  ): Promise<ProcessPaginationResult> {
+    return this.processService.findAll(page, perPage);
   }
 
   @Get(':id')
