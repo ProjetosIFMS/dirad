@@ -5,7 +5,12 @@ meta {
 }
 
 get {
-  url: {{base_url}}/process/
+  url: {{base_url}}/process?page=1&perPage=10
   body: none
   auth: inherit
+}
+
+query {
+  page: 1
+  perPage: 10
 }
