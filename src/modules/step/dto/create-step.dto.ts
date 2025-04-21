@@ -1,4 +1,5 @@
-import { IsBoolean, IsDateString, IsInt, IsString } from 'class-validator';
+import { IsDateString, IsEnum, IsInt, IsString } from 'class-validator';
+import { Status } from '../types/Status';
 
 export class CreateStepDto {
   @IsString()
@@ -16,8 +17,8 @@ export class CreateStepDto {
   @IsDateString()
   deadline: Date;
 
-  @IsBoolean()
-  status: boolean;
+  @IsEnum(Status)
+  status: Status;
 
   @IsInt()
   order: number;
