@@ -16,6 +16,7 @@ enum Status {
   IN_PROGRESS
   COMPLETED
   CANCELLED
+  INACTIVE
 }
 
 model User {
@@ -64,7 +65,7 @@ model Step {
   origin        String
   destiny       String
   deadline      DateTime
-  status        Boolean         @default(true)
+  status        Status
   order         Int
   // Relação many-to-one com Activity: cada passo pertence a uma única atividade
   activity      Activity        @relation(fields: [activityId], references: [id])
