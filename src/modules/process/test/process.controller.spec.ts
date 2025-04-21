@@ -190,6 +190,27 @@ describe('ProcessController', () => {
       expectedEndDate: new Date(),
       updatedAt: new Date(),
       checklistId: 'checklist-1',
+      modality: {
+        name: 'Modality',
+        id: 'modality-1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      processType: {
+        name: 'Type',
+        id: 'type-1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      executingUnit: {
+        name: 'Unit',
+        id: 'unit-1',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        color: 'red',
+        shortName: 'U',
+      },
+      participatingUnits: [],
     };
     jest.spyOn(service, 'findOne').mockResolvedValue(process);
     expect(await controller.findOne(id)).toEqual(process);
