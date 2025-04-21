@@ -7,6 +7,7 @@ import {
   FindStepByIdUseCase,
   UpdateStepUseCase,
 } from '../use-cases';
+import { Status } from '../types/Status';
 
 describe('StepService', () => {
   let service: StepService;
@@ -62,7 +63,7 @@ describe('StepService', () => {
       origin: 'Origin',
       destiny: 'Destiny',
       deadline: new Date(),
-      status: true,
+      status: Status.PENDING,
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
@@ -91,7 +92,7 @@ describe('StepService', () => {
       origin: 'New Origin',
       destiny: 'New Destiny',
       deadline: new Date(),
-      status: false,
+      status: Status.COMPLETED,
       order: 2,
       activityId: 'activity-1',
       modalityId: 'modality-1',

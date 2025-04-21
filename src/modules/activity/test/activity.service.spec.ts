@@ -70,14 +70,21 @@ describe('ActivityService', () => {
   });
 
   it('should call findAll use case', async () => {
-    await service.findAll();
-    expect(service['FindAllActivityUseCase'].execute).toHaveBeenCalled();
+    const includeSteps = true;
+    await service.findAll(includeSteps);
+    expect(service['FindAllActivityUseCase'].execute).toHaveBeenCalledWith(
+      includeSteps,
+    );
   });
 
   it('should call findOne use case', async () => {
     const id = 'test-id';
-    await service.findOne(id);
-    expect(service['FindActivityByIdUseCase'].execute).toHaveBeenCalledWith(id);
+    const includeSteps = true;
+    await service.findOne(id, includeSteps);
+    expect(service['FindActivityByIdUseCase'].execute).toHaveBeenCalledWith(
+      id,
+      includeSteps,
+    );
   });
 
   it('should call update use case', async () => {

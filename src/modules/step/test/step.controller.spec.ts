@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StepController } from '../step.controller';
 import { StepService } from '../step.service';
+import { Status } from '../types/Status';
 
 describe('StepController', () => {
   let controller: StepController;
@@ -38,7 +39,7 @@ describe('StepController', () => {
       origin: 'Origin',
       destiny: 'Destiny',
       deadline: new Date(),
-      status: true,
+      status: Status.PENDING,
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
@@ -57,7 +58,7 @@ describe('StepController', () => {
         origin: 'Origin',
         destiny: 'Destiny',
         deadline: new Date(),
-        status: true,
+        status: Status.COMPLETED,
         order: 1,
         activityId: 'activity-1',
         modalityId: 'modality-1',
@@ -76,7 +77,7 @@ describe('StepController', () => {
       origin: 'Origin',
       destiny: 'Destiny',
       deadline: new Date(),
-      status: true,
+      status: Status.PENDING,
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
@@ -93,7 +94,7 @@ describe('StepController', () => {
       origin: 'New Origin',
       destiny: 'New Destiny',
       deadline: new Date(),
-      status: false,
+      status: Status.COMPLETED,
       order: 2,
       activityId: 'activity-1',
       modalityId: 'modality-1',
