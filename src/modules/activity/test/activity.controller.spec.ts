@@ -74,32 +74,36 @@ describe('ActivityController', () => {
   });
 
   it('should call service findAll', async () => {
+    const includeSteps = true;
     const activities = [
       {
         id: 'activity-1',
         name: 'Test Activity',
         description: 'Test Description',
+        step: [],
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     ];
     jest.spyOn(service, 'findAll').mockResolvedValue(activities);
-    expect(await controller.findAll()).toEqual(activities);
-    expect(service.findAll).toHaveBeenCalled();
+    expect(await controller.findAll(includeSteps)).toEqual(activities);
+    expect(service.findAll).toHaveBeenCalledWith(includeSteps);
   });
 
   it('should call service findOne', async () => {
+    const includeSteps = true;
     const id = 'activity-1';
     const activity = {
       id,
       name: 'Test Activity',
       description: 'Test Description',
+      step: [],
       createdAt: new Date(),
       updatedAt: new Date(),
     };
     jest.spyOn(service, 'findOne').mockResolvedValue(activity);
-    expect(await controller.findOne(id)).toEqual(activity);
-    expect(service.findOne).toHaveBeenCalledWith(id);
+    expect(await controller.findOne(id, includeSteps)).toEqual(activity);
+    expect(service.findOne).toHaveBeenCalledWith(id, includeSteps);
   });
 
   it('should call service update', async () => {
