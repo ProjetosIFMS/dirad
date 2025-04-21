@@ -23,12 +23,12 @@ export class ActivityService {
     return await this.CreateActivityUseCase.execute(data);
   }
 
-  async findAll() {
-    return await this.FindAllActivityUseCase.execute();
+  async findAll(includeSteps: boolean) {
+    return await this.FindAllActivityUseCase.execute(includeSteps);
   }
 
-  async findOne(id: string) {
-    return await this.FindActivityByIdUseCase.execute(id);
+  async findOne(id: string, includeSteps: boolean) {
+    return await this.FindActivityByIdUseCase.execute(id, includeSteps);
   }
 
   async update(id: string, data: UpdateActivityDto) {

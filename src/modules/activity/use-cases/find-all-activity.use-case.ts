@@ -12,9 +12,13 @@ export class FindAllActivityUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute() {
+  async execute(includeSteps: boolean) {
     try {
-      return await this.ActivityRepository.findAll();
+      const shouldIncludeSteps =
+        typeof includeSteps === 'string' && includeSteps === 'true'
+          ? true
+          : false;
+      return await this.ActivityRepository.findAll(shouldIncludeSteps);
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,

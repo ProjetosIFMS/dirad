@@ -5,7 +5,11 @@ import { PrismaService } from 'src/shared/databases/prisma.database';
 export class FindAllActivityRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll() {
-    return await this.prisma.activity.findMany();
+  async findAll(includeSteps: boolean) {
+    return await this.prisma.activity.findMany({
+      include: {
+        step: includeSteps,
+      },
+    });
   }
 }

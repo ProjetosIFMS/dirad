@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
@@ -21,13 +22,16 @@ export class ActivityController {
   }
 
   @Get()
-  findAll() {
-    return this.activityService.findAll();
+  findAll(@Query('includeSteps') includeSteps: boolean) {
+    return this.activityService.findAll(includeSteps);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.activityService.findOne(id);
+  findOne(
+    @Param('id') id: string,
+    @Query('includeSteps') includeSteps: boolean,
+  ) {
+    return this.activityService.findOne(id, includeSteps);
   }
 
   @Patch(':id')

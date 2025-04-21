@@ -13,9 +13,16 @@ export class FindActivityByIdUseCase {
     private readonly logger: Logger = new Logger(),
   ) {}
 
-  async execute(id: string) {
+  async execute(id: string, includeSteps: boolean) {
     try {
-      const activityExist = await this.findActivitydRepository.findById(id);
+      const shouldIncludeSteps =
+        typeof includeSteps === 'string' && includeSteps === 'true'
+          ? true
+          : false;
+      const activityExist = await this.findActivitydRepository.findById(
+        id,
+        shouldIncludeSteps,
+      );
       if (!activityExist) {
         throw new NotFoundException('Activity not found');
       }
