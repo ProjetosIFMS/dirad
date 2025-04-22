@@ -30,20 +30,11 @@ export class UpdateProcessDto {
   @Type(() => ParticipatingUnit)
   participatingUnits?: ParticipatingUnit['id'][];
 
-  @IsNumber()
-  costing?: number;
-
   @IsString()
   situation?: string;
 
   @IsNumber()
   estimatedValue?: number;
-
-  @IsNumber()
-  totalValue?: number;
-
-  @IsNumber()
-  supplierValue?: number;
 
   @IsString()
   object?: string;
