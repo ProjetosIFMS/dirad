@@ -17,6 +17,8 @@ enum Status {
   COMPLETED
   CANCELLED
   INACTIVE
+  OVERDUE
+  PREDICTED
 }
 
 model User {
@@ -155,11 +157,11 @@ model Process {
   modality              Modality            @relation(fields: [modalityId], references: [id])
   // Relação one-to-many com ParticipatingUnit: um processo pode ter muitas unidades participantes
   participatingUnits    ParticipatingUnit[]
-  costing               Float
+  //costing               Float
   situation             String
   estimatedValue        Float
-  totalValue            Float
-  supplierValue         Float
+  //totalValue            Float
+  //supplierValue         Float
   object                String
   adictionalInformation String
   priority              Int

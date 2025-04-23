@@ -31,20 +31,11 @@ export class CreateProcessDto {
   @IsUUID(undefined, { each: true })
   participatingUnits?: string[];
 
-  @IsNumber()
-  costing: number;
-
   @IsString()
   situation: string;
 
   @IsNumber()
   estimatedValue: number;
-
-  @IsNumber()
-  totalValue: number;
-
-  @IsNumber()
-  supplierValue: number;
 
   @IsString()
   object: string;
