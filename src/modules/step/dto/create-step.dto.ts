@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsInt, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsString } from 'class-validator';
 import { Status } from '../types/Status';
 
 export class CreateStepDto {
@@ -14,8 +14,8 @@ export class CreateStepDto {
   @IsString()
   destiny: string;
 
-  @IsDateString()
-  estimatedCompletionDays: Date;
+  @IsInt()
+  estimatedCompletionDays: number;
 
   @IsEnum(Status)
   status: Status;
