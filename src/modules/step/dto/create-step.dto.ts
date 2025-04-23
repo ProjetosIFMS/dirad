@@ -15,7 +15,7 @@ export class CreateStepDto {
   destiny: string;
 
   @IsDateString()
-  deadline: Date;
+  estimatedCompletionDays: Date;
 
   @IsEnum(Status)
   status: Status;

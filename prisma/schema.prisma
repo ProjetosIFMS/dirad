@@ -62,24 +62,24 @@ model Activity {
 }
 
 model Step {
-  id            String          @id @default(cuid())
-  description   String
-  origin        String
-  destiny       String
-  deadline      DateTime
-  status        Status
-  order         Int
+  id                      String          @id @default(cuid())
+  description             String
+  origin                  String
+  destiny                 String
+  estimatedCompletionDays DateTime
+  status                  Status
+  order                   Int
   // Relação many-to-one com Activity: cada passo pertence a uma única atividade
-  activity      Activity        @relation(fields: [activityId], references: [id])
-  activityId    String
+  activity                Activity        @relation(fields: [activityId], references: [id])
+  activityId              String
   // Relação one-to-many com CompletedStep: um passo pode ter muitas instâncias completadas
-  completedStep CompletedStep[]
-  modalityId    String
-  modality      Modality        @relation(fields: [modalityId], references: [id])
+  completedStep           CompletedStep[]
+  modalityId              String
+  modality                Modality        @relation(fields: [modalityId], references: [id])
 
   @@index([activityId, modalityId])
   @@index([status])
-  @@index([deadline])
+  @@index([estimatedCompletionDays])
 }
 
 model CompletedStep {
