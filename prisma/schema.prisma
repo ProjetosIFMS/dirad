@@ -66,7 +66,7 @@ model Step {
   description             String
   origin                  String
   destiny                 String
-  estimatedCompletionDays DateTime
+  estimatedCompletionDays Int
   status                  Status
   order                   Int
   // Relação many-to-one com Activity: cada passo pertence a uma única atividade
