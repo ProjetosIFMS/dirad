@@ -1,4 +1,4 @@
-import { IsEnum, IsInt, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 import { Status } from '../types/Status';
 
 export class UpdateStepDto {
@@ -20,9 +20,11 @@ export class UpdateStepDto {
   @IsInt()
   order: number;
 
+  @IsOptional()
   @IsString()
-  activityId: string;
+  activityId?: string;
 
+  @IsOptional()
   @IsString()
-  modalityId: string;
+  modalityId?: string;
 }

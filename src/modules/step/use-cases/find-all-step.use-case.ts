@@ -27,7 +27,7 @@ export class FindAllStepsUseCase {
         description: 'Error finding Steps',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }
