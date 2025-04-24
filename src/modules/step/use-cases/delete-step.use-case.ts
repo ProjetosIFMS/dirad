@@ -30,7 +30,7 @@ export class DeleteStepUseCase {
         description: 'Error deleting Step',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }

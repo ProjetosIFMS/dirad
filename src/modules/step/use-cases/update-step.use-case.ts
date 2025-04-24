@@ -31,7 +31,7 @@ export class UpdateStepUseCase {
         description: 'Error updating Step',
       });
       this.logger.error(error.message);
-      throw err;
+      throw error;
     }
   }
 }
