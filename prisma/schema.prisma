@@ -70,12 +70,12 @@ model Step {
   status                  Status
   order                   Int
   // Relação many-to-one com Activity: cada passo pertence a uma única atividade
-  activity                Activity        @relation(fields: [activityId], references: [id])
-  activityId              String
+  activity                Activity?       @relation(fields: [activityId], references: [id])
+  activityId              String?
   // Relação one-to-many com CompletedStep: um passo pode ter muitas instâncias completadas
   completedStep           CompletedStep[]
-  modalityId              String
-  modality                Modality        @relation(fields: [modalityId], references: [id])
+  modalityId              String?
+  modality                Modality?       @relation(fields: [modalityId], references: [id])
 
   @@index([activityId, modalityId])
   @@index([status])
