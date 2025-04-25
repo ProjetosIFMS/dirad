@@ -16,6 +16,7 @@ import { CompletedStepModule } from './modules/completed-step/completed-step.mod
 import { JwtStrategy } from './shared/strategies/jwt.strategy';
 import { JwtService } from '@nestjs/jwt';
 import { ModalityModule } from './modules/modality/modality.module';
+import { SectorModule } from './modules/sector/sector.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ModalityModule } from './modules/modality/modality.module';
     ProcessModule,
     CompletedStepModule,
     ModalityModule,
+    SectorModule,
   ],
   controllers: [AppController],
   providers: [

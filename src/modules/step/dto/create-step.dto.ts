@@ -14,6 +14,10 @@ export class CreateStepDto {
   @IsString()
   destiny: string;
 
+  @IsString()
+  @IsOptional()
+  template?: string;
+
   @IsInt()
   estimatedCompletionDays: number;
 
@@ -30,4 +34,8 @@ export class CreateStepDto {
   @IsOptional()
   @IsString()
   modalityId?: string;
+
+  @IsOptional()
+  @IsString()
+  sectorId?: string;
 }
