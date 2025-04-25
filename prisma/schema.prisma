@@ -66,6 +66,7 @@ model Step {
   description             String
   origin                  String
   destiny                 String
+  template                String?
   estimatedCompletionDays Int
   status                  Status
   order                   Int
@@ -76,8 +77,10 @@ model Step {
   completedStep           CompletedStep[]
   modalityId              String?
   modality                Modality?       @relation(fields: [modalityId], references: [id])
+  Sector                  Sector?         @relation(fields: [sectorId], references: [id])
+  sectorId                String?
 
-  @@index([activityId, modalityId])
+  @@index([activityId, modalityId, sectorId])
   @@index([status])
   @@index([estimatedCompletionDays])
 }
@@ -210,4 +213,15 @@ model ParticipatingUnit {
   @@unique([unitId, processId])
   @@index([unitId])
   @@index([processId])
+}
+
+model Sector {
+  id                String   @id @default(uuid())
+  shortName         String
+  description       String
+  responsible_name  String
+  responsible_email String
+  steps             Step[]
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
