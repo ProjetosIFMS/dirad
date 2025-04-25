@@ -67,6 +67,8 @@ describe('StepService', () => {
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
+      sectorId: 'sector-1',
+      template: 'template-1',
     };
     await service.create(createDto);
     expect(service['CreateStepUseCase'].execute).toHaveBeenCalledWith(
@@ -96,6 +98,8 @@ describe('StepService', () => {
       order: 2,
       activityId: 'activity-1',
       modalityId: 'modality-1',
+      sectorId: 'sector-1',
+      template: 'template-1',
     };
     await service.update(id, updateDto);
     expect(service['UpdateStepUseCase'].execute).toHaveBeenCalledWith(

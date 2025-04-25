@@ -43,6 +43,8 @@ describe('StepController', () => {
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
+      sectorId: 'sector-1',
+      template: 'template-1',
     };
     const mockResponse = { ...createDto };
     jest.spyOn(service, 'create').mockResolvedValue(mockResponse);
@@ -62,6 +64,8 @@ describe('StepController', () => {
         order: 1,
         activityId: 'activity-1',
         modalityId: 'modality-1',
+        sectorId: 'sector-1',
+        template: 'template-1',
       },
     ];
     jest.spyOn(service, 'findAll').mockResolvedValue(steps);
@@ -81,6 +85,8 @@ describe('StepController', () => {
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
+      sectorId: 'sector-1',
+      template: 'template-1',
     };
     jest.spyOn(service, 'findOne').mockResolvedValue(step);
     expect(await controller.findOne(id)).toEqual(step);
@@ -98,6 +104,8 @@ describe('StepController', () => {
       order: 2,
       activityId: 'activity-1',
       modalityId: 'modality-1',
+      sectorId: 'sector-1',
+      template: 'template-1',
     };
     const updatedStep = { id, ...updateDto };
     jest.spyOn(service, 'update').mockResolvedValue(updatedStep);
