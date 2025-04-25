@@ -156,8 +156,8 @@ model Process {
   executingUnit         Unit                @relation(fields: [executingUnitId], references: [id], onDelete: Cascade)
   executingUnitId       String
   // Relação many-to-one com Modality: cada processo tem uma única modalidade
-  modalityId            String
-  modality              Modality            @relation(fields: [modalityId], references: [id])
+  modalityId            String?
+  modality              Modality?            @relation(fields: [modalityId], references: [id])
   // Relação one-to-many com ParticipatingUnit: um processo pode ter muitas unidades participantes
   participatingUnits    ParticipatingUnit[]
   //costing               Float

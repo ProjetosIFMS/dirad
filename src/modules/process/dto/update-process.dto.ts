@@ -6,6 +6,7 @@ import {
   IsNumber,
   IsDateString,
   ValidateNested,
+  IsOptional,
 } from 'class-validator';
 import { ParticipatingUnit } from 'src/modules/participating-unit/types/participating-unit';
 
@@ -22,6 +23,7 @@ export class UpdateProcessDto {
   executingUnitId?: string;
 
   @IsString()
+  @IsOptional()
   @IsUUID()
   modalityId?: string;
 

@@ -24,6 +24,7 @@ export class CreateProcessDto {
   executingUnitId: string;
 
   @IsString()
+  @IsOptional()
   @IsUUID()
   modalityId: string;
 
