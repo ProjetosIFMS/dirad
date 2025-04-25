@@ -1,6 +1,7 @@
 import {
   Injectable,
   Logger,
+  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
 import { FindAllSectorRepository } from '../repository';
@@ -16,6 +17,12 @@ export class FindAllSectorUseCase {
     try {
       const sector = await this.SectorRepository.findAll();
       this.logger.log('Sectors Found', FindAllSectorUseCase.name);
+      if (!sector) {
+        throw new NotFoundException(
+          'No Sectors Found',
+          FindAllSectorUseCase.name,
+        );
+      }
       return sector;
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {
