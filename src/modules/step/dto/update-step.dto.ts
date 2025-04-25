@@ -11,6 +11,10 @@ export class UpdateStepDto {
   @IsString()
   destiny: string;
 
+  @IsString()
+  @IsOptional()
+  template?: string;
+
   @IsInt()
   estimatedCompletionDays: number;
 
@@ -27,4 +31,8 @@ export class UpdateStepDto {
   @IsOptional()
   @IsString()
   modalityId?: string;
+
+  @IsOptional()
+  @IsString()
+  sectorId?: string;
 }

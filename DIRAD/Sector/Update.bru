@@ -1,0 +1,17 @@
+meta {
+  name: Update
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{base_url}}/sector/5e5e1a7e-4122-4ede-af34-591ba56e5e11
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "teste":"a"
+  }
+}
