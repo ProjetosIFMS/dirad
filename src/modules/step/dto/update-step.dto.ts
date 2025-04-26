@@ -31,8 +31,4 @@ export class UpdateStepDto {
   @IsOptional()
   @IsString()
   modalityId?: string;
-
-  @IsOptional()
-  @IsString()
-  sectorId?: string;
 }

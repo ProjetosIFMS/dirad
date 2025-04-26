@@ -79,10 +79,8 @@ model Step {
   completedStep           CompletedStep[]
   modalityId              String?
   modality                Modality?       @relation(fields: [modalityId], references: [id])
-  Sector                  Sector?         @relation(fields: [sectorId], references: [id])
-  sectorId                String?
 
-  @@index([activityId, modalityId, sectorId])
+  @@index([activityId, modalityId])
   @@index([status])
   @@index([estimatedCompletionDays])
 }
@@ -223,7 +221,6 @@ model Sector {
   description       String
   responsible_name  String
   responsible_email String
-  steps             Step[]
   originSteps       Step[]   @relation("originSector")
   destinySteps      Step[]   @relation("destinySector")
   createdAt         DateTime @default(now())

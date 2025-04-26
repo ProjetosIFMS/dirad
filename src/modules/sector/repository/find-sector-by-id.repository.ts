@@ -9,7 +9,8 @@ export class FindSectorByIdRepository {
     return await this.prisma.sector.findUnique({
       where: { id },
       include: {
-        steps: true,
+        originSteps: true,
+        destinySteps: true,
       },
     });
   }

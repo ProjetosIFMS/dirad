@@ -8,9 +8,6 @@ export class FindStepByIdRepository {
   async FindById(id: string) {
     return await this.prisma.step.findUnique({
       where: { id },
-      include: {
-        Sector: true,
-      },
     });
   }
 }

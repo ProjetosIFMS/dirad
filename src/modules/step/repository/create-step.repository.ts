@@ -19,7 +19,6 @@ export class CreateStepRepository {
         order: data.order,
         activityId: data.activityId,
         modalityId: data.modalityId,
-        sectorId: data.sectorId,
       },
     });
     return step;
