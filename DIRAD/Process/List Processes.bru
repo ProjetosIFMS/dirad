@@ -5,12 +5,13 @@ meta {
 }
 
 get {
-  url: {{base_url}}/process?page=1&perPage=10
+  url: {{base_url}}/process?page=1&perPage=10&unitShortName=TL
   body: none
   auth: inherit
 }
 
-query {
+params:query {
   page: 1
   perPage: 10
+  unitShortName: TL
 }
