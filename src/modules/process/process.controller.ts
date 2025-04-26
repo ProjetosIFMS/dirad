@@ -27,8 +27,15 @@ export class ProcessController {
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perPage', new DefaultValuePipe(10), ParseIntPipe) perPage: number,
+    @Query('unitShortName') UnitShortName?: string,
+    @Query('participatingUnitShortName') PUnitShortName?: string,
   ) {
-    return this.processService.findAll(page, perPage);
+    return this.processService.findAll(
+      page,
+      perPage,
+      UnitShortName,
+      PUnitShortName,
+    );
   }
   @Get(':id')
   findOne(@Param('id') id: string) {

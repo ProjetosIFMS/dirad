@@ -17,23 +17,36 @@ export class ProcessService {
     private readonly findAllProcessesUseCase: FindAllProcessesUseCase,
   ) {}
 
-  create(createProcessDto: CreateProcessDto) {
-    return this.createProcessUseCase.execute(createProcessDto);
+  async create(createProcessDto: CreateProcessDto) {
+    return await this.createProcessUseCase.execute(createProcessDto);
   }
 
-  findAll(page: number, perPage: number) {
-    return this.findAllProcessesUseCase.execute(page, perPage);
+  async findAll(
+    page: number,
+    perPage: number,
+    UnitShortName?: string,
+    PUnitShortName?: string,
+  ) {
+    return await this.findAllProcessesUseCase.execute(
+      page,
+      perPage,
+      UnitShortName,
+      PUnitShortName,
+    );
   }
 
-  findOne(process_id: string) {
-    return this.findProcessByIdUseCase.execute(process_id);
+  async findOne(process_id: string) {
+    return await this.findProcessByIdUseCase.execute(process_id);
   }
 
-  update(process_id: string, updateProcessDto: UpdateProcessDto) {
-    return this.updateProcessUseCase.execute(process_id, updateProcessDto);
+  async update(process_id: string, updateProcessDto: UpdateProcessDto) {
+    return await this.updateProcessUseCase.execute(
+      process_id,
+      updateProcessDto,
+    );
   }
 
-  remove(process_id: string) {
-    return this.deleteProcessUseCase.execute(process_id);
+  async remove(process_id: string) {
+    return await this.deleteProcessUseCase.execute(process_id);
   }
 }
