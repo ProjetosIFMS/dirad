@@ -9,10 +9,10 @@ export class CreateStepDto {
   description: string;
 
   @IsString()
-  origin: string;
+  originSector: string;
 
   @IsString()
-  destiny: string;
+  destinySector: string;
 
   @IsString()
   @IsOptional()

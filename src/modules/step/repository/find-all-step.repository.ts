@@ -6,6 +6,10 @@ export class FindAllStepsRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async FindAll() {
-    return await this.prisma.step.findMany();
+    return await this.prisma.step.findMany({
+      include: {
+        Sector: true,
+      },
+    });
   }
 }

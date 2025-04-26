@@ -9,6 +9,8 @@ export class FindAllSectorRepository {
     return await this.prisma.sector.findMany({
       include: {
         steps: true,
+        originSteps: true,
+        destinySteps: true,
       },
     });
   }
