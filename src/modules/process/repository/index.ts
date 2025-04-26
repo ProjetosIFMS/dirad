@@ -4,3 +4,6 @@ export * from './update-process.repository';
 export * from './find-all-processes.repository';
 export * from './find-process-by-id.repository';
 export * from './find-process-number.repository';
+export * from './find-process-by-unit.repository';
+export * from './find-process-by-participatingunit.repository';
+export * from './find-process-by-shortnames-unit.repository';
