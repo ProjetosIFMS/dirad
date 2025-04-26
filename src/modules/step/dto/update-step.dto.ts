@@ -6,10 +6,10 @@ export class UpdateStepDto {
   description: string;
 
   @IsString()
-  origin: string;
+  originSector: string;
 
   @IsString()
-  destiny: string;
+  destinySector: string;
 
   @IsString()
   @IsOptional()
@@ -31,8 +31,4 @@ export class UpdateStepDto {
   @IsOptional()
   @IsString()
   modalityId?: string;
-
-  @IsOptional()
-  @IsString()
-  sectorId?: string;
 }

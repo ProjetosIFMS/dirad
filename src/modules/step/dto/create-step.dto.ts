@@ -9,10 +9,10 @@ export class CreateStepDto {
   description: string;
 
   @IsString()
-  origin: string;
+  originSector: string;
 
   @IsString()
-  destiny: string;
+  destinySector: string;
 
   @IsString()
   @IsOptional()
@@ -34,8 +34,4 @@ export class CreateStepDto {
   @IsOptional()
   @IsString()
   modalityId?: string;
-
-  @IsOptional()
-  @IsString()
-  sectorId?: string;
 }
