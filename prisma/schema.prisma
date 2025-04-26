@@ -64,9 +64,11 @@ model Activity {
 model Step {
   id                      String          @id @default(cuid())
   description             String
-  origin                  String
-  destiny                 String
-  template                String?
+  origin                  Sector          @relation("originSector", fields: [originSector], references: [id])
+  originSector            String
+  destiny                 Sector          @relation("destinySector", fields: [destinySector], references: [id])
+  destinySector           String
+  template                String
   estimatedCompletionDays Int
   status                  Status
   order                   Int
@@ -157,11 +159,11 @@ model Process {
   executingUnitId       String
   // Relação many-to-one com Modality: cada processo tem uma única modalidade
   modalityId            String?
-  modality              Modality?            @relation(fields: [modalityId], references: [id])
+  modality              Modality?           @relation(fields: [modalityId], references: [id])
   // Relação one-to-many com ParticipatingUnit: um processo pode ter muitas unidades participantes
   participatingUnits    ParticipatingUnit[]
   //costing               Float
-  situation             String
+  situation             String //float
   estimatedValue        Float
   //totalValue            Float
   //supplierValue         Float
@@ -222,6 +224,8 @@ model Sector {
   responsible_name  String
   responsible_email String
   steps             Step[]
+  originSteps       Step[]   @relation("originSector")
+  destinySteps      Step[]   @relation("destinySector")
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
