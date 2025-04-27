@@ -11,8 +11,8 @@ export class CreateStepRepository {
       data: {
         id: data.id,
         description: data.description,
-        originSector: data.originSector,
-        destinySector: data.destinySector,
+        originSectorId: data.originSectorId,
+        destinySectorId: data.destinySectorId,
         template: data.template,
         estimatedCompletionDays: data.estimatedCompletionDays,
         status: data.status,
