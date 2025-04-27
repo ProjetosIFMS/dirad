@@ -19,14 +19,11 @@ export class CreateActivityUseCase {
       this.logger.log('Activity Created', CreateActivityUseCase.name);
       return activity;
     } catch (err) {
-      const error = new ServiceUnavailableException(
-        'Failed to create activity',
-        {
-          cause: err,
-          description: `Error creating Activity: ${err.message || 'Unknown error occurred'}`,
-        },
-      );
-      this.logger.error(error.message, err.stack);
+      const error = new ServiceUnavailableException('Something bad happened', {
+        cause: err,
+        description: 'Error creating Activity',
+      });
+      this.logger.error(error.message);
       throw error;
     }
   }

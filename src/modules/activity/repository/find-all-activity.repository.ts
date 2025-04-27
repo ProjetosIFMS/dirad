@@ -8,14 +8,7 @@ export class FindAllActivityRepository {
   async findAll(includeSteps: boolean) {
     return await this.prisma.activity.findMany({
       include: {
-        step: includeSteps
-          ? {
-              include: {
-                originSector: true,
-                destinySector: true,
-              },
-            }
-          : false,
+        step: includeSteps,
       },
     });
   }
