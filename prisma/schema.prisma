@@ -64,10 +64,10 @@ model Activity {
 model Step {
   id                      String          @id @default(cuid())
   description             String
-  origin                  Sector          @relation("originSector", fields: [originSector], references: [id])
-  originSector            String
-  destiny                 Sector          @relation("destinySector", fields: [destinySector], references: [id])
-  destinySector           String
+  originSector            Sector          @relation("originSector", fields: [originSectorId], references: [id])
+  originSectorId          String
+  destinySector           Sector          @relation("destinySector", fields: [destinySectorId], references: [id])
+  destinySectorId         String
   template                String
   estimatedCompletionDays Int
   status                  Status
@@ -83,6 +83,8 @@ model Step {
   @@index([activityId, modalityId])
   @@index([status])
   @@index([estimatedCompletionDays])
+  @@index([originSectorId])
+  @@index([destinySectorId])
 }
 
 model CompletedStep {

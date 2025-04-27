@@ -28,11 +28,14 @@ export class DeleteActivityUseCase {
       this.logger.log('Activity Deleted', DeleteActivityUseCase.name);
       return activity;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
-        cause: err,
-        description: 'Error Deleting Activity',
-      });
-      this.logger.error(error.message);
+      const error = new ServiceUnavailableException(
+        'Failed to delete activity',
+        {
+          cause: err,
+          description: `Error deleting Activity: ${err.message || 'Unknown error occurred'}`,
+        },
+      );
+      this.logger.error(error.message, err.stack);
       throw error;
     }
   }

@@ -6,10 +6,10 @@ export class UpdateStepDto {
   description: string;
 
   @IsString()
-  originSector: string;
+  originSectorId: string;
 
   @IsString()
-  destinySector: string;
+  destinySectorId: string;
 
   @IsString()
   @IsOptional()

@@ -29,11 +29,11 @@ export class FindActivityByIdUseCase {
       this.logger.log('Activity Found', FindActivityByIdUseCase.name);
       return activityExist;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException('Failed to find activity', {
         cause: err,
-        description: 'Error finding Actitivty',
+        description: `Error finding Activity: ${err.message || 'Unknown error occurred'}`,
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, err.stack);
       throw error;
     }
   }

@@ -29,12 +29,15 @@ export class UpdateActivityUseCase {
       this.logger.log('Activity Updated', UpdateActivityUseCase.name);
       return activity;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
-        cause: err,
-        description: 'Error updating activity',
-      });
-      this.logger.error(error.message);
-      throw err;
+      const error = new ServiceUnavailableException(
+        'Failed to update activity',
+        {
+          cause: err,
+          description: `Error updating Activity: ${err.message || 'Unknown error occurred'}`,
+        },
+      );
+      this.logger.error(error.message, err.stack);
+      throw error;
     }
   }
 }

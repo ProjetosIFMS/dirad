@@ -20,12 +20,15 @@ export class FindAllActivityUseCase {
           : false;
       return await this.ActivityRepository.findAll(shouldIncludeSteps);
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
-        cause: err,
-        description: 'Error Finding Actitivity',
-      });
-      this.logger.error(error.message);
-      throw err;
+      const error = new ServiceUnavailableException(
+        'Failed to find activities',
+        {
+          cause: err,
+          description: `Error finding Activities: ${err.message || 'Unknown error occurred'}`,
+        },
+      );
+      this.logger.error(error.message, err.stack);
+      throw error;
     }
   }
 }
