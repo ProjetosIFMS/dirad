@@ -14,11 +14,7 @@ export class FindAllActivityUseCase {
 
   async execute(includeSteps: boolean) {
     try {
-      const shouldIncludeSteps =
-        typeof includeSteps === 'string' && includeSteps === 'true'
-          ? true
-          : false;
-      return await this.ActivityRepository.findAll(shouldIncludeSteps);
+      return await this.ActivityRepository.findAll(includeSteps);
     } catch (err) {
       const error = new ServiceUnavailableException(
         'Failed to find activities',

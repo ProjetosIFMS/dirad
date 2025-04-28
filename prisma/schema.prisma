@@ -22,7 +22,7 @@ enum Status {
 }
 
 model User {
-  id            String          @id @default(cuid())
+  id            String          @id @default(uuid())
   firstName     String
   lastName      String
   picture       String?
@@ -50,7 +50,7 @@ model Session {
 }
 
 model Activity {
-  id          String   @id @default(cuid())
+  id          String   @id @default(uuid())
   name        String
   description String
   createdAt   DateTime @default(now())
@@ -62,7 +62,7 @@ model Activity {
 }
 
 model Step {
-  id                      String          @id @default(cuid())
+  id                      String          @id @default(uuid())
   description             String
   originSector            Sector          @relation("originSector", fields: [originSectorId], references: [id])
   originSectorId          String
@@ -88,7 +88,7 @@ model Step {
 }
 
 model CompletedStep {
-  id          String    @id @default(cuid())
+  id          String    @id @default(uuid())
   stepId      String
   checklistId String
   // Relação many-to-one com Checklist: cada completedStep pertence a um único checklist
@@ -98,8 +98,8 @@ model CompletedStep {
   status      Status
   completedAt DateTime  @default(now())
   // Relação many-to-one com User: cada completedStep é realizado por um único usuário
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
+  user        User?     @relation(fields: [userId], references: [id])
+  userId      String?
 
   @@index([stepId])
   @@index([checklistId])
@@ -109,7 +109,7 @@ model CompletedStep {
 }
 
 model Checklist {
-  id            String          @id @default(cuid())
+  id            String          @id @default(uuid())
   // Relação one-to-one com Process: cada checklist pertence a um único processo
   process       Process         @relation(fields: [processId], references: [id], onDelete: Cascade)
   processId     String          @unique
@@ -122,7 +122,7 @@ model Checklist {
 }
 
 model Unit {
-  id                 String              @id @default(cuid())
+  id                 String              @id @default(uuid())
   name               String
   color              String
   shortName          String
@@ -137,7 +137,7 @@ model Unit {
 }
 
 model ProcessType {
-  id        String    @id @default(cuid())
+  id        String    @id @default(uuid())
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -148,7 +148,7 @@ model ProcessType {
 }
 
 model Process {
-  id                    String              @id @default(cuid())
+  id                    String              @id @default(uuid())
   processNumber         String              @unique
   objectDescription     String
   // Relação many-to-one com ProcessType: cada processo tem um único tipo
@@ -201,7 +201,7 @@ model Modality {
 }
 
 model ParticipatingUnit {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   // Relação many-to-one com Unit: cada participação está associada a uma única unidade
   unit      Unit     @relation(fields: [unitId], references: [id])
   unitId    String

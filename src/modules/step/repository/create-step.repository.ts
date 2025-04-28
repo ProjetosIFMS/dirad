@@ -11,14 +11,34 @@ export class CreateStepRepository {
       data: {
         id: data.id,
         description: data.description,
-        originSectorId: data.originSectorId,
-        destinySectorId: data.destinySectorId,
+        originSector: {
+          connect: {
+            id: data.originSectorId,
+          },
+        },
+        destinySector: {
+          connect: {
+            id: data.destinySectorId,
+          },
+        },
         template: data.template,
         estimatedCompletionDays: data.estimatedCompletionDays,
         status: data.status,
         order: data.order,
-        activityId: data.activityId,
-        modalityId: data.modalityId,
+        ...(data.activityId && {
+          activity: {
+            connect: {
+              id: data.activityId,
+            },
+          },
+        }),
+        ...(data.modalityId && {
+          modality: {
+            connect: {
+              id: data.modalityId,
+            },
+          },
+        }),
       },
     });
     return step;

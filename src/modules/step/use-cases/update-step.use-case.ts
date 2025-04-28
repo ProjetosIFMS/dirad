@@ -26,11 +26,12 @@ export class UpdateStepUseCase {
       this.logger.log('Step updated', UpdateStepUseCase.name);
       return step;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException({
+        message: 'Failed to update step',
         cause: err,
-        description: 'Error updating Step',
+        description: `Error updating Step: ${err.message || 'Unknown error occurred'}`,
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, err.stack);
       throw error;
     }
   }

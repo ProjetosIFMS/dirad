@@ -19,11 +19,12 @@ export class CreateStepUseCase {
       this.logger.log('Step Created', CreateStepUseCase.name);
       return step;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException({
+        message: 'Failed to create step',
         cause: err,
-        description: 'Error creating Step',
+        description: `Error creating Step: ${err.message || 'Unknown error occurred'}`,
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, err.stack);
       throw error;
     }
   }
