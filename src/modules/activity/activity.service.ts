@@ -8,6 +8,7 @@ import {
   UpdateActivityUseCase,
 } from './use-cases';
 import { FindActivityByIdUseCase } from './use-cases/find-activity.use-case';
+import { FindAllByOrderUseCase } from './use-cases/find-all-by-order.use-case';
 
 @Injectable()
 export class ActivityService {
@@ -17,6 +18,7 @@ export class ActivityService {
     private readonly FindActivityByIdUseCase: FindActivityByIdUseCase,
     private readonly UpdateActivityUseCase: UpdateActivityUseCase,
     private readonly DeleteActivityUseCase: DeleteActivityUseCase,
+    private readonly FindAllByOrderUseCase: FindAllByOrderUseCase,
   ) {}
 
   async create(data: CreateActivityDto) {
@@ -25,6 +27,10 @@ export class ActivityService {
 
   async findAll(includeSteps: boolean) {
     return await this.FindAllActivityUseCase.execute(includeSteps);
+  }
+
+  async findAllByOrder() {
+    return await this.FindAllByOrderUseCase.execute();
   }
 
   async findOne(id: string, includeSteps: boolean) {

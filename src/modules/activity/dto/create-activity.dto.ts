@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateActivityDto {
   @IsString()
@@ -6,4 +6,7 @@ export class CreateActivityDto {
 
   @IsString()
   description: string;
+
+  @IsNumber()
+  order: number;
 }

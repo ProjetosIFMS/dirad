@@ -53,12 +53,14 @@ model Activity {
   id          String   @id @default(uuid())
   name        String
   description String
+  order       Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   // Relação one-to-many com Step: uma atividade pode ter muitos passos
   step        Step[]
 
   @@index([name])
+  @@index([order])
 }
 
 model Step {
