@@ -11,7 +11,12 @@ export class FindAllByOrderRepository {
         order: 'asc',
       },
       include: {
-        step: true,
+        step: {
+          include: {
+            originSector: true,
+            destinySector: true,
+          },
+        },
       },
     });
   }
