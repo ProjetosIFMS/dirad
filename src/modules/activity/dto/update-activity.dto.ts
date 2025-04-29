@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateActivityDto } from './create-activity.dto';
-import { IsDateString, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class UpdateActivityDto extends PartialType(CreateActivityDto) {
   @IsString()
@@ -9,9 +9,6 @@ export class UpdateActivityDto extends PartialType(CreateActivityDto) {
   @IsString()
   description: string;
 
-  @IsDateString()
-  createdAt: Date;
-
-  @IsDateString()
-  updatedAt: Date;
+  @IsNumber()
+  order: number;
 }

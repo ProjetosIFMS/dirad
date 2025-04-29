@@ -9,6 +9,9 @@ export class FindCheckListByIdRepository {
       where: {
         id,
       },
+      include: {
+        completedStep: true,
+      },
     });
     return checklists;
   }

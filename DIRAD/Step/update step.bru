@@ -5,13 +5,37 @@ meta {
 }
 
 patch {
-  url: {{base_url}}/step/cm9qetr8p0001h04wt4bim8nl
+  url: {{base_url}}/step/cm9ys0iwm0003t0e2zyzgpxew
   body: json
   auth: none
 }
 
 body:json {
   {
-    "status":"PENDING"
+      "id": "cm9ys0iwm0003t0e2zyzgpxew",
+      "order": 1,
+      "description": "Abertura processual no Suap, em um dos \"Tipos de Processos\" listados abaixo:",
+      "status": "PREDICTED",
+      "estimatedCompletionDays": 1,
+      "originSector": {
+          "id": "45163dc0-e57a-49a7-b9cd-b9c239114c35",
+          "shortName": "DIRAD",
+          "description": "Direção de Administração",
+          "responsible_name": "Lucas",
+          "responsible_email": "lucas@teste.com",
+          "createdAt": "2025-04-26T21:42:48.692Z",
+          "updatedAt": "2025-04-26T21:42:48.692Z"
+      },
+      "destinySector": {
+          "id": "be028943-086c-4aa1-a3de-129a8dfb68ec",
+          "shortName": "COTAD",
+          "description": "Coordenação do Curso de Tecnologia e Análise de Sistemas",
+          "responsible_name": "Lucas",
+          "responsible_email": "lucas@teste.com",
+          "createdAt": "2025-04-26T21:43:25.919Z",
+          "updatedAt": "2025-04-26T21:43:25.919Z"
+      },
+      "activityId": "cm9w0xgw10008t00mbvntkbvl",
+      "template": "https://suap.ifms.edu.br/documento_eletronico/visualizar_documento/411430/"
   }
 }

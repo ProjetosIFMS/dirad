@@ -1,26 +1,29 @@
-import { IsDateString, IsEnum, IsString, IsUUID } from 'class-validator';
+import { IsDateString, IsEnum, IsString, IsOptional } from 'class-validator';
 import { Status } from '../types/Status';
 
 export class CreateCompletedStepDto {
-  @IsString()
-  @IsUUID()
-  id: string;
-
-  @IsEnum(Status)
+  @IsEnum(Status, {
+    message:
+      'O status deve ser um dos valores válidos: PENDING, IN_PROGRESS, COMPLETED, CANCELLED, INACTIVE, OVERDUE, PREDICTED',
+  })
   status: Status;
 
-  @IsString()
-  // @IsUUID()
+  @IsString({ message: 'O ID do passo deve ser uma string' })
   stepId: string;
 
-  @IsString()
-  @IsUUID()
+  @IsString({ message: 'O ID do checklist deve ser uma string' })
   checklistId: string;
 
-  @IsUUID()
-  @IsString()
-  userId: string;
+  @IsOptional()
+  @IsString({ message: 'O ID do usuário deve ser uma string' })
+  userId?: string;
 
-  @IsDateString()
+  @IsDateString(
+    {},
+    {
+      message:
+        'A data de conclusão deve estar no formato ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ)',
+    },
+  )
   completedAt: Date;
 }

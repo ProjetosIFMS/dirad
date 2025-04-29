@@ -22,11 +22,12 @@ export class FindStepByIdUseCase {
       this.logger.log('Step found', FindStepByIdUseCase.name);
       return step;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException({
+        message: 'Failed to find step',
         cause: err,
-        description: 'Error finding step',
+        description: `Error finding Step: ${err.message || 'Unknown error occurred'}`,
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, err.stack);
       throw error;
     }
   }
