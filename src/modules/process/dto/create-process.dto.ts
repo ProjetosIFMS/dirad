@@ -4,32 +4,23 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  IsUUID,
 } from 'class-validator';
 
 export class CreateProcessDto {
   @IsString()
-  @IsUUID()
-  id: string;
-
-  @IsString()
   processNumber: string;
 
   @IsString()
-  @IsUUID()
   processTypeId: string;
 
   @IsString()
-  @IsUUID()
   executingUnitId: string;
 
   @IsString()
   @IsOptional()
-  @IsUUID()
   modalityId: string;
 
   @IsArray()
-  @IsUUID(undefined, { each: true })
   participatingUnits?: string[];
 
   @IsString()
@@ -51,7 +42,6 @@ export class CreateProcessDto {
   priority: number;
 
   @IsString()
-  @IsUUID()
   @IsOptional()
   checklistId?: string;
 

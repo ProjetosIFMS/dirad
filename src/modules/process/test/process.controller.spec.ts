@@ -109,56 +109,53 @@ describe('ProcessController', () => {
   });
 
   it('should call service findAll', async () => {
-    const processes = {
-      data: [
-        {
-          id: '1',
-          name: 'Test Process',
-          processNumber: '123',
-          processTypeId: 'type-1',
-          executingUnitId: 'unit-1',
-          modalityId: 'modality-1',
-          situation: 'situation-1',
-          estimatedValue: 1000,
-          object: 'object-1',
-          objectDescription: 'description',
-          adictionalInformation: 'info',
-          priority: 1,
-          startDate: new Date(),
+    const processes = [
+      {
+        id: 'process-1',
+        name: 'Test Process',
+        processNumber: '123',
+        processTypeId: 'type-1',
+        executingUnitId: 'unit-1',
+        modalityId: 'modality-1',
+        situation: 'situation-1',
+        estimatedValue: 1000,
+        object: 'object-1',
+        objectDescription: 'description',
+        adictionalInformation: 'info',
+        priority: 1,
+        startDate: new Date(),
+        createdAt: new Date(),
+        expectedEndDate: new Date(),
+        updatedAt: new Date(),
+        checklistId: 'checklist-1',
+        executingUnit: {
+          name: 'Unit',
+          id: 'unit-1',
           createdAt: new Date(),
-          expectedEndDate: new Date(),
           updatedAt: new Date(),
-          checklistId: 'checklist-1',
-          processType: {
-            name: 'Type',
-            id: 'type-1',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          },
-          executingUnit: {
-            name: 'Unit',
-            id: 'unit-1',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            color: 'red',
-            shortName: 'U',
-          },
-          modality: {
-            name: 'Modality',
-            id: 'modality-1',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          },
-          participatingUnits: [],
+          color: 'red',
+          shortName: 'U',
         },
-      ],
-      total: 1,
-      page: 1,
-      perPage: 10,
-    };
+        processType: {
+          name: 'Type',
+          id: 'type-1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        modality: {
+          name: 'Modality',
+          id: 'modality-1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        participatingUnits: [],
+      },
+    ];
     jest.spyOn(service, 'findAll').mockResolvedValue(processes);
-    expect(await controller.findAll(1, 10)).toEqual(processes);
-    expect(service.findAll).toHaveBeenCalledWith(1, 10);
+    expect(await controller.findAll(1, 10, 'unit1', 'punit1')).toEqual(
+      processes,
+    );
+    expect(service.findAll).toHaveBeenCalledWith(1, 10, 'unit1', 'punit1');
   });
 
   it('should call service findOne', async () => {

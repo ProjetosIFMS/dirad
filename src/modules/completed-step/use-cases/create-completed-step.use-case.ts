@@ -16,14 +16,18 @@ export class CreateCompletedStepUseCase {
   async execute(data: CreateCompletedStepDto) {
     try {
       const completedStep = await this.CompletedStepRepository.create(data);
-      this.logger.log('Completed Step', CreateCompletedStepUseCase.name);
+      this.logger.log(
+        'Completed Step Created',
+        CreateCompletedStepUseCase.name,
+      );
       return completedStep;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException({
+        message: 'Failed to create completed step',
         cause: err,
-        description: 'Error creating Created Step',
+        description: `Error creating Completed Step: ${err.message || 'Unknown error occurred'}`,
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, err.stack);
       throw error;
     }
   }

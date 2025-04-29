@@ -26,6 +26,11 @@ export class ActivityController {
     return this.activityService.findAll(includeSteps);
   }
 
+  @Get('order')
+  findAllByOrder() {
+    return this.activityService.findAllByOrder();
+  }
+
   @Get(':id')
   findOne(
     @Param('id') id: string,

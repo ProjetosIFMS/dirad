@@ -2,8 +2,9 @@ import { IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 import { Status } from '../types/Status';
 
 export class CreateStepDto {
+  @IsOptional()
   @IsString()
-  id: string;
+  id?: string;
 
   @IsString()
   description: string;

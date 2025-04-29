@@ -36,14 +36,13 @@ describe('StepController', () => {
     const createDto = {
       id: 'step-1',
       description: 'Test Step',
-      origin: 'Origin',
-      destiny: 'Destiny',
+      originSectorId: 'origin-sector-1',
+      destinySectorId: 'destiny-sector-1',
       estimatedCompletionDays: 4,
       status: Status.PENDING,
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
-      sectorId: 'sector-1',
       template: 'template-1',
     };
     const mockResponse = { ...createDto };
@@ -57,14 +56,25 @@ describe('StepController', () => {
       {
         id: 'step-1',
         description: 'Test Step',
-        origin: 'Origin',
-        destiny: 'Destiny',
+        originSector: {
+          id: 'origin-sector-1',
+          description: 'Origin Sector',
+          shortName: 'OS',
+          responsible_name: 'John Doe',
+          responsible_email: 'john@example.com',
+        },
+        destinySector: {
+          id: 'destiny-sector-1',
+          description: 'Destiny Sector',
+          shortName: 'DS',
+          responsible_name: 'Jane Doe',
+          responsible_email: 'jane@example.com',
+        },
         estimatedCompletionDays: 3,
         status: Status.COMPLETED,
         order: 1,
         activityId: 'activity-1',
         modalityId: 'modality-1',
-        sectorId: 'sector-1',
         template: 'template-1',
       },
     ];
@@ -78,14 +88,13 @@ describe('StepController', () => {
     const step = {
       id,
       description: 'Test Step',
-      origin: 'Origin',
-      destiny: 'Destiny',
+      originSectorId: 'origin-sector-1',
+      destinySectorId: 'destiny-sector-1',
       estimatedCompletionDays: 2,
       status: Status.PENDING,
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
-      sectorId: 'sector-1',
       template: 'template-1',
     };
     jest.spyOn(service, 'findOne').mockResolvedValue(step);
@@ -97,14 +106,13 @@ describe('StepController', () => {
     const id = 'step-1';
     const updateDto = {
       description: 'Updated Step',
-      origin: 'New Origin',
-      destiny: 'New Destiny',
+      originSectorId: 'new-origin-sector-1',
+      destinySectorId: 'new-destiny-sector-1',
       estimatedCompletionDays: 2,
       status: Status.COMPLETED,
       order: 2,
       activityId: 'activity-1',
       modalityId: 'modality-1',
-      sectorId: 'sector-1',
       template: 'template-1',
     };
     const updatedStep = { id, ...updateDto };

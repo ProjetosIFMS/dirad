@@ -25,11 +25,12 @@ export class DeleteStepUseCase {
       this.logger.log('Step deleted.', DeleteStepUseCase.name);
       return step;
     } catch (err) {
-      const error = new ServiceUnavailableException('Something bad happened', {
+      const error = new ServiceUnavailableException({
+        message: 'Failed to delete step',
         cause: err,
-        description: 'Error deleting Step',
+        description: `Error deleting Step: ${err.message || 'Unknown error occurred'}`,
       });
-      this.logger.error(error.message);
+      this.logger.error(error.message, err.stack);
       throw error;
     }
   }

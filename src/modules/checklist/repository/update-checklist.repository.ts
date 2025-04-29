@@ -6,9 +6,13 @@ import { UpdateChecklistDto } from '../dto/update-checklist.dto';
 export class UpdateChecklistRepository {
   constructor(private readonly prisma: PrismaService) {}
   async update(id: string, data: UpdateChecklistDto) {
+    const now = new Date().toISOString();
     const checklist = await this.prisma.checklist.update({
       where: { id },
-      data,
+      data: {
+        ...data,
+        updatedAt: now,
+      },
     });
     return checklist;
   }
