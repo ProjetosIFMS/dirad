@@ -3,3 +3,4 @@ export * from './delete-step.repository';
 export * from './find-all-step.repository';
 export * from './find-step.repository';
 export * from './update-step.repository';
+export * from './find-all-step-by-order.repository';

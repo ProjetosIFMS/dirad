@@ -4,7 +4,11 @@ import { UpdateStepDto } from './dto/update-step.dto';
 import { CreateStepUseCase } from './use-cases/create-step.use-case';
 import { FindAllStepsUseCase } from './use-cases/find-all-step.use-case';
 import { FindStepByIdUseCase } from './use-cases/find-step.use-case';
-import { DeleteStepUseCase, UpdateStepUseCase } from './use-cases';
+import {
+  DeleteStepUseCase,
+  FindAllStepByOrderUseCase,
+  UpdateStepUseCase,
+} from './use-cases';
 
 @Injectable()
 export class StepService {
@@ -14,6 +18,7 @@ export class StepService {
     private readonly FindStepByIdUseCase: FindStepByIdUseCase,
     private readonly UpdateStepUseCase: UpdateStepUseCase,
     private readonly DeleteStepUseCase: DeleteStepUseCase,
+    private readonly FindAllStepByOrderUseCase: FindAllStepByOrderUseCase,
   ) {}
   async create(data: CreateStepDto) {
     return await this.CreateStepUseCase.execute(data);
@@ -21,6 +26,10 @@ export class StepService {
 
   async findAll() {
     return await this.FindAllStepsUseCase.execute();
+  }
+
+  async findAllByOrder() {
+    return await this.FindAllStepByOrderUseCase.execute();
   }
 
   async findOne(id: string) {
