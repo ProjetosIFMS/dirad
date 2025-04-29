@@ -80,10 +80,12 @@ describe('ProcessService', () => {
   });
 
   it('should call findAll use case', async () => {
-    await service.findAll(1, 10);
+    await service.findAll(1, 10, 'unit1', 'punit1');
     expect(service['findAllProcessesUseCase'].execute).toHaveBeenCalledWith(
       1,
       10,
+      'unit1',
+      'punit1',
     );
   });
 

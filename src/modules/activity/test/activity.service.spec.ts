@@ -6,6 +6,7 @@ import {
   FindAllActivityUseCase,
   FindActivityByIdUseCase,
   UpdateActivityUseCase,
+  FindAllByOrderUseCase,
 } from '../use-cases';
 
 describe('ActivityService', () => {
@@ -45,6 +46,12 @@ describe('ActivityService', () => {
             execute: jest.fn(),
           },
         },
+        {
+          provide: FindAllByOrderUseCase,
+          useValue: {
+            execute: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
@@ -60,6 +67,7 @@ describe('ActivityService', () => {
       id: 'activity-1',
       name: 'Test Activity',
       description: 'Test Description',
+      order: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -92,6 +100,7 @@ describe('ActivityService', () => {
     const updateDto = {
       name: 'Updated Activity',
       description: 'Updated Description',
+      order: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
     };

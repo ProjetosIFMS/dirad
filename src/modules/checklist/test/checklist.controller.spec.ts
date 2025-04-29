@@ -78,6 +78,7 @@ describe('ChecklistController', () => {
         id: '1',
         name: 'Test Checklist',
         processId: 'process-1',
+        completedStep: [],
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -90,9 +91,10 @@ describe('ChecklistController', () => {
   it('should call service findOne', async () => {
     const id = '1';
     const checklist = {
-      id,
+      id: 'checklist-1',
       name: 'Test Checklist',
       processId: 'process-1',
+      completedStep: [],
       createdAt: new Date(),
       updatedAt: new Date(),
     };
