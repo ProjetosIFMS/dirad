@@ -7,6 +7,7 @@ import {
   FindAllActivityUseCase,
   FindActivityByIdUseCase,
   UpdateActivityUseCase,
+  FindAllByOrderUseCase,
 } from '../use-cases';
 
 describe('ActivityController', () => {
@@ -48,6 +49,12 @@ describe('ActivityController', () => {
             execute: jest.fn(),
           },
         },
+        {
+          provide: FindAllByOrderUseCase,
+          useValue: {
+            execute: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
@@ -64,6 +71,7 @@ describe('ActivityController', () => {
       id: 'activity-1',
       name: 'Test Activity',
       description: 'Test Description',
+      order: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -80,6 +88,7 @@ describe('ActivityController', () => {
         id: 'activity-1',
         name: 'Test Activity',
         description: 'Test Description',
+        order: 1,
         step: [],
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -97,6 +106,7 @@ describe('ActivityController', () => {
       id,
       name: 'Test Activity',
       description: 'Test Description',
+      order: 1,
       step: [],
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -111,10 +121,18 @@ describe('ActivityController', () => {
     const updateDto = {
       name: 'Updated Activity',
       description: 'Updated Description',
+      order: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    const updatedActivity = { id, ...updateDto };
+    const updatedActivity = {
+      name: 'Updated Activity',
+      description: 'Updated Description',
+      order: 2,
+      id: 'activity-1',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
     jest.spyOn(service, 'update').mockResolvedValue(updatedActivity);
     expect(await controller.update(id, updateDto)).toEqual(updatedActivity);
     expect(service.update).toHaveBeenCalledWith(id, updateDto);

@@ -60,14 +60,13 @@ describe('StepService', () => {
     const createDto = {
       id: 'step-1',
       description: 'Test Step',
-      origin: 'Origin',
-      destiny: 'Destiny',
+      originSectorId: 'origin-sector-1',
+      destinySectorId: 'destiny-sector-1',
       estimatedCompletionDays: 5,
       status: Status.PENDING,
       order: 1,
       activityId: 'activity-1',
       modalityId: 'modality-1',
-      sectorId: 'sector-1',
       template: 'template-1',
     };
     await service.create(createDto);
@@ -91,14 +90,13 @@ describe('StepService', () => {
     const id = 'step-1';
     const updateDto = {
       description: 'Updated Step',
-      origin: 'New Origin',
-      destiny: 'New Destiny',
+      originSectorId: 'new-origin-sector-1',
+      destinySectorId: 'new-destiny-sector-1',
       estimatedCompletionDays: 5,
       status: Status.COMPLETED,
       order: 2,
       activityId: 'activity-1',
       modalityId: 'modality-1',
-      sectorId: 'sector-1',
       template: 'template-1',
     };
     await service.update(id, updateDto);
