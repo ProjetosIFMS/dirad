@@ -20,6 +20,11 @@ export class StepController {
     return this.stepService.create(data);
   }
 
+  @Get('order')
+  findAllByOrder() {
+    return this.stepService.findAllByOrder();
+  }
+
   @Get()
   findAll() {
     return this.stepService.findAll();
