@@ -3,6 +3,7 @@ import { StepService } from '../step.service';
 import {
   CreateStepUseCase,
   DeleteStepUseCase,
+  FindAllStepByOrderUseCase,
   FindAllStepsUseCase,
   FindStepByIdUseCase,
   UpdateStepUseCase,
@@ -42,6 +43,12 @@ describe('StepService', () => {
         },
         {
           provide: DeleteStepUseCase,
+          useValue: {
+            execute: jest.fn(),
+          },
+        },
+        {
+          provide: FindAllStepByOrderUseCase,
           useValue: {
             execute: jest.fn(),
           },
