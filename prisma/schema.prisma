@@ -70,7 +70,7 @@ model Step {
   originSectorId          String
   destinySector           Sector          @relation("destinySector", fields: [destinySectorId], references: [id])
   destinySectorId         String
-  template                String
+  template                String?
   estimatedCompletionDays Int
   status                  Status
   order                   Int
