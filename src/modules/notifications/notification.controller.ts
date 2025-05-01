@@ -19,7 +19,7 @@ export class NotificationController {
   async sendProcessNotification(@Body() data: ProcessNotification) {
     try {
       await this.mailer.sendMail(data);
-      return { message: 'Notification process sending sucessfully!' };
+      return { message: 'Notification process sending successfully!' };
     } catch (err) {
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
