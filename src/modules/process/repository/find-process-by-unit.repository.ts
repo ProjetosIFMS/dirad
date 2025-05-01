@@ -26,6 +26,7 @@ export class FindProcessByUnitRepository {
               unit: true,
             },
           },
+          modality: true,
         },
         skip: Number(skip),
         take: Number(perPage),

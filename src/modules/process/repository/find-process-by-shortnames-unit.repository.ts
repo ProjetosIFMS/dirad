@@ -34,6 +34,7 @@ export class FindProcessByShortNamesRepository {
               unit: true,
             },
           },
+          modality: true,
         },
         skip: Number(skip),
         take: Number(perPage),
