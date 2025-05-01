@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notificação de Processo</title>
+  <!-- Import Poppins from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #f0f2ff;
+      font-family: 'Poppins', sans-serif;
+      color: #000000;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .header {
+      background-color: #6366f1;
+      color: #ffffff;
+      padding: 16px 24px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .header img {
+      vertical-align: middle;
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+    }
+    .content {
+      padding: 24px;
+    }
+    .content p {
+      margin-bottom: 16px;
+      line-height: 1.5;
+      font-size: 1rem;
+      color: #000000;
+      text-align: justify;
+    }
+    .highlight {
+      color: #6366f1;
+      font-weight: 600;
+    }
+    .footer {
+      padding: 16px;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #000000;
+      background-color: #fafafb;
+    }
+    .footer img {
+      vertical-align: middle;
+      width: 18px;
+      height: 18px;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <img src="https://img.icons8.com/ios-filled/24/ffffff/appointment-reminders.png" alt="Ícone de lembrete" />
+        <h1>Notificação de Processo</h1>
+      </div>
+      <div class="content">
+        <p>Olá <span class="highlight">{{destinyResponsibleName}}</span>,</p>
+        <p>
+          O processo de número <span class="highlight">{{processNumber}}</span> que trata do objeto
+          <span class="highlight">{{object}}</span> está na atividade
+          <span class="highlight">{{activityTitle}}</span> e chegou à etapa
+          <span class="highlight">{{taskTitle}}</span> da qual você é responsável.
+        </p>
+        <p>
+          <span class="highlight">Prazo de conclusão:</span> {{deadlineDate}} às {{deadlineTime}}
+        </p>
+      </div>
+      <div class="footer">
+        <img src="https://img.icons8.com/ios-filled/18/handshake.png" alt="Ícone de aperto de mãos" />
+        Respeitosamente,<br />
+        <strong>DIRAD Notifications</strong>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
