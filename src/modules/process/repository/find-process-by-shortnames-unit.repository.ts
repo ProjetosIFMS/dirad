@@ -27,8 +27,13 @@ export class FindProcessByShortNamesRepository {
           },
         },
         include: {
+          processType: true,
           executingUnit: true,
-          participatingUnits: true,
+          participatingUnits: {
+            include: {
+              unit: true,
+            },
+          },
         },
         skip: Number(skip),
         take: Number(perPage),

@@ -19,7 +19,13 @@ export class FindProcessByUnitRepository {
           },
         },
         include: {
+          processType: true,
           executingUnit: true,
+          participatingUnits: {
+            include: {
+              unit: true,
+            },
+          },
         },
         skip: Number(skip),
         take: Number(perPage),

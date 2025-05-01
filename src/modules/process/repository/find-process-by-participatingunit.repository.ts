@@ -24,8 +24,13 @@ export class FindProcessByParticipatingUnitRepository {
           },
         },
         include: {
-          //executingUnit: true,
-          participatingUnits: true,
+          processType: true,
+          executingUnit: true,
+          participatingUnits: {
+            include: {
+              unit: true,
+            },
+          },
         },
         skip: Number(skip),
         take: Number(perPage),
