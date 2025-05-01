@@ -151,10 +151,18 @@ describe('ProcessController', () => {
         participatingUnits: [],
       },
     ];
-    jest.spyOn(service, 'findAll').mockResolvedValue(processes);
-    expect(await controller.findAll(1, 10, 'unit1', 'punit1')).toEqual(
-      processes,
-    );
+    jest.spyOn(service, 'findAll').mockResolvedValue({
+      data: processes,
+      total: processes.length,
+      page: 1,
+      perPage: 10,
+    });
+    expect(await controller.findAll(1, 10, 'unit1', 'punit1')).toEqual({
+      data: processes,
+      total: processes.length,
+      page: 1,
+      perPage: 10,
+    });
     expect(service.findAll).toHaveBeenCalledWith(1, 10, 'unit1', 'punit1');
   });
 
