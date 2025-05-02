@@ -98,6 +98,7 @@ model CompletedStep {
   // Relação many-to-one com Step: cada completedStep está associada a um único step
   step        Step      @relation(fields: [stepId], references: [id])
   status      Status
+  order       Int
   completedAt DateTime  @default(now())
   // Relação many-to-one com User: cada completedStep é realizado por um único usuário
   user        User?     @relation(fields: [userId], references: [id])
