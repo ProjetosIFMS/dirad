@@ -17,7 +17,7 @@ export class FindAllCompletedStepByOrderUseCase {
     try {
       const completedSteps =
         await this.completedStepRepository.findAllCompletedStepByOrder();
-      if (!completedSteps) {
+      if (completedSteps.length === 0) {
         throw new NotFoundException('Completed Steps not found');
       }
       this.logger.log(
