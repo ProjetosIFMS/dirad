@@ -8,6 +8,7 @@ import {
   FindProcessByIdUseCase,
   UpdateProcessUseCase,
 } from '../use-cases';
+import { Status } from '../types/Status';
 
 describe('ProcessController', () => {
   let controller: ProcessController;
@@ -66,7 +67,7 @@ describe('ProcessController', () => {
       processTypeId: 'type-1',
       executingUnitId: 'unit-1',
       modalityId: 'modality-1',
-      situation: 'situation-1',
+      situation: Status.COMPLETED,
       estimatedValue: 1000,
       object: 'object-1',
       objectDescription: 'description',
@@ -117,7 +118,7 @@ describe('ProcessController', () => {
         processTypeId: 'type-1',
         executingUnitId: 'unit-1',
         modalityId: 'modality-1',
-        situation: 'situation-1',
+        situation: Status.COMPLETED,
         estimatedValue: 1000,
         object: 'object-1',
         objectDescription: 'description',
@@ -155,7 +156,13 @@ describe('ProcessController', () => {
     expect(await controller.findAll(1, 10, 'unit1', 'punit1')).toEqual(
       processes,
     );
-    expect(service.findAll).toHaveBeenCalledWith(1, 10, 'unit1', 'punit1');
+    expect(service.findAll).toHaveBeenCalledWith(
+      1,
+      10,
+      'unit1',
+      'punit1',
+      undefined,
+    );
   });
 
   it('should call service findOne', async () => {
@@ -167,7 +174,7 @@ describe('ProcessController', () => {
       processTypeId: 'type-1',
       executingUnitId: 'unit-1',
       modalityId: 'modality-1',
-      situation: 'situation-1',
+      situation: Status.COMPLETED,
       estimatedValue: 1000,
       object: 'object-1',
       objectDescription: 'description',
@@ -213,7 +220,7 @@ describe('ProcessController', () => {
       processTypeId: 'type-1',
       executingUnitId: 'unit-1',
       modalityId: 'modality-1',
-      situation: 'situation-1',
+      situation: Status.COMPLETED,
       estimatedValue: 1000,
       object: 'object-1',
       objectDescription: 'description',
