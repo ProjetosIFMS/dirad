@@ -7,8 +7,10 @@ import {
   IsDateString,
   ValidateNested,
   IsOptional,
+  IsEnum,
 } from 'class-validator';
 import { ParticipatingUnit } from 'src/modules/participating-unit/types/participating-unit';
+import { Status } from '../types/Status';
 
 export class UpdateProcessDto {
   @IsString()
@@ -32,8 +34,8 @@ export class UpdateProcessDto {
   @Type(() => ParticipatingUnit)
   participatingUnits?: ParticipatingUnit['id'][];
 
-  @IsString()
-  situation?: string;
+  @IsEnum(Status)
+  situation?: Status;
 
   @IsNumber()
   estimatedValue?: number;
