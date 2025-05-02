@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsString, IsOptional } from 'class-validator';
+import { IsEnum, IsString, IsOptional, IsNumber } from 'class-validator';
 import { Status } from '../types/Status';
 
 export class CreateCompletedStepDto {
@@ -14,16 +14,12 @@ export class CreateCompletedStepDto {
   @IsString({ message: 'O ID do checklist deve ser uma string' })
   checklistId: string;
 
+  @IsNumber()
+  order: number;
+
   @IsOptional()
   @IsString({ message: 'O ID do usuário deve ser uma string' })
   userId?: string;
 
-  @IsDateString(
-    {},
-    {
-      message:
-        'A data de conclusão deve estar no formato ISO 8601 (YYYY-MM-DDTHH:mm:ss.sssZ)',
-    },
-  )
-  completedAt: Date;
+// Removed commented-out date validation code for clarity and to reduce confusion.
 }

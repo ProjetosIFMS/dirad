@@ -3,6 +3,7 @@ import { CreateCompletedStepDto } from './dto/create-completed-step.dto';
 import { UpdateCompletedStepDto } from './dto/update-completed-step.dto';
 import {
   CreateCompletedStepUseCase,
+  FindAllCompletedStepByOrderUseCase,
   FindAllCompletedStepUseCase,
   FindCompletedStepByIdUseCase,
   UpdateCompletedStepUseCase,
@@ -17,6 +18,7 @@ export class CompletedStepService {
     private readonly FindCompletedStepUseCase: FindCompletedStepByIdUseCase,
     private readonly UpdateCompletedStepUseCase: UpdateCompletedStepUseCase,
     private readonly DeleteCompletedStepUseCase: DeleteCompletedStepUseCase,
+    private readonly FindAllCompletedStepByOrderUseCase: FindAllCompletedStepByOrderUseCase,
   ) {}
 
   async create(data: CreateCompletedStepDto) {
@@ -25,6 +27,10 @@ export class CompletedStepService {
 
   async findAll() {
     return await this.FindAllCompletedStepUseCase.execute();
+  }
+
+  async findAllByOrder() {
+    return await this.FindAllCompletedStepByOrderUseCase.execute();
   }
 
   async findOne(id: string) {

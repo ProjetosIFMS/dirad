@@ -20,6 +20,11 @@ export class CompletedStepController {
     return this.completedStepService.create(createCompletedStepDto);
   }
 
+  @Get('order')
+  findAllByOrder() {
+    return this.completedStepService.findAllByOrder();
+  }
+
   @Get()
   findAll() {
     return this.completedStepService.findAll();
