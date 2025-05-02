@@ -37,6 +37,8 @@ export class FindAllProcessesUseCase {
           await this.findProcessByShortNamesRepository.listByUnitShortNames(
             UnitShortName,
             participatingUnitShortName,
+            page,
+            perPage,
           );
         if (!unitExists) {
           this.logger.error('Unit not found');
@@ -53,6 +55,8 @@ export class FindAllProcessesUseCase {
         const unitExists =
           await this.findProcessByUnitRepository.listByUnitShortName(
             UnitShortName,
+            page,
+            perPage,
           );
         if (!unitExists) {
           this.logger.error('Unit not found');
@@ -66,6 +70,8 @@ export class FindAllProcessesUseCase {
         const PunitExists =
           await this.findProcessByParticipatingUnitRepository.listByParticipatingUnitShortName(
             participatingUnitShortName,
+            page,
+            perPage,
           );
         if (!PunitExists) {
           this.logger.error('Unit not found');

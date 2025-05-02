@@ -16,6 +16,7 @@ describe('StepController', () => {
           useValue: {
             create: jest.fn(),
             findAll: jest.fn(),
+            findAllByOrder: jest.fn(),
             findOne: jest.fn(),
             update: jest.fn(),
             remove: jest.fn(),

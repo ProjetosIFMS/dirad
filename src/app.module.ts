@@ -17,6 +17,7 @@ import { JwtStrategy } from './shared/strategies/jwt.strategy';
 import { JwtService } from '@nestjs/jwt';
 import { ModalityModule } from './modules/modality/modality.module';
 import { SectorModule } from './modules/sector/sector.module';
+import { NotificationModule } from './modules/notifications/notification.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { SectorModule } from './modules/sector/sector.module';
     CompletedStepModule,
     ModalityModule,
     SectorModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [

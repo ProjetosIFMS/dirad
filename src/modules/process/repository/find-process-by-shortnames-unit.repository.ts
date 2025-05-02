@@ -8,24 +8,55 @@ export class FindProcessByShortNamesRepository {
   async listByUnitShortNames(
     unitShortName: string,
     participatingUnitShortName: string,
+    page: number,
+    perPage: number,
   ) {
-    return await this.prisma.process.findMany({
-      where: {
-        executingUnit: {
-          shortName: unitShortName,
-        },
-        participatingUnits: {
-          some: {
-            unit: {
-              shortName: participatingUnitShortName,
+    const skip = (page - 1) * perPage;
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.process.findMany({
+        where: {
+          executingUnit: {
+            shortName: unitShortName,
+          },
+          participatingUnits: {
+            some: {
+              unit: {
+                shortName: participatingUnitShortName,
+              },
             },
           },
         },
-      },
-      include: {
-        executingUnit: true,
-        participatingUnits: true,
-      },
-    });
+        include: {
+          processType: true,
+          executingUnit: true,
+          participatingUnits: {
+            include: {
+              unit: true,
+            },
+          },
+          modality: true,
+        },
+        skip: Number(skip),
+        take: Number(perPage),
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+      this.prisma.process.count({
+        where: {
+          executingUnit: {
+            shortName: unitShortName,
+          },
+          participatingUnits: {
+            some: {
+              unit: {
+                shortName: participatingUnitShortName,
+              },
+            },
+          },
+        },
+      }),
+    ]);
+    return { data, total, page, perPage };
   }
 }
