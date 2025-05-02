@@ -89,9 +89,9 @@ export class FindAllProcessesUseCase {
             page,
             perPage,
           );
-        if (!statusExists) {
-          this.logger.error('Unit not found');
-          throw new NotFoundException('Unit not found');
+        if (!statusExists || (Array.isArray(statusExists) && statusExists.length === 0)) {
+          this.logger.error('No processes found for the given status');
+          throw new NotFoundException('No processes found for the given status');
         }
         this.logger.log('Processes found', FindAllProcessesUseCase.name);
         return statusExists;
