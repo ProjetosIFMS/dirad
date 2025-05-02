@@ -10,6 +10,8 @@ import {
   FindProcessByUnitRepository,
 } from '../repository';
 import { FindProcessByShortNamesRepository } from '../repository/find-process-by-shortnames-unit.repository';
+import { FindProcessByStatusRepository } from '../repository/find-process-by-status.repository';
+import { Status } from '../types/Status';
 
 @Injectable()
 export class FindAllProcessesUseCase {
@@ -18,6 +20,7 @@ export class FindAllProcessesUseCase {
     private readonly findProcessByUnitRepository: FindProcessByUnitRepository,
     private readonly findProcessByParticipatingUnitRepository: FindProcessByParticipatingUnitRepository,
     private readonly findProcessByShortNamesRepository: FindProcessByShortNamesRepository,
+    private readonly findProcessByStatusRepository: FindProcessByStatusRepository,
     private readonly logger: Logger,
   ) {}
 
@@ -26,6 +29,7 @@ export class FindAllProcessesUseCase {
     perPage: number,
     UnitShortName?: string,
     participatingUnitShortName?: string,
+    status?: Status,
   ) {
     try {
       if (UnitShortName && participatingUnitShortName) {
@@ -75,6 +79,22 @@ export class FindAllProcessesUseCase {
         }
         this.logger.log('Processes found', FindAllProcessesUseCase.name);
         return PunitExists;
+      }
+
+      if (status) {
+        const statusExists =
+          await this.findProcessByStatusRepository.listProcessByStatus(
+            status,
+            UnitShortName,
+            page,
+            perPage,
+          );
+        if (!statusExists || (Array.isArray(statusExists) && statusExists.length === 0)) {
+          this.logger.error('No processes found for the given status');
+          throw new NotFoundException('No processes found for the given status');
+        }
+        this.logger.log('Processes found', FindAllProcessesUseCase.name);
+        return statusExists;
       }
 
       const processes = await this.findAllProcessesRepository.findProcesses(

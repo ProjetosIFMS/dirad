@@ -7,6 +7,7 @@ import {
   FindProcessByIdUseCase,
   UpdateProcessUseCase,
 } from '../use-cases';
+import { Status } from '../types/Status';
 
 describe('ProcessService', () => {
   let service: ProcessService;
@@ -62,7 +63,7 @@ describe('ProcessService', () => {
       processTypeId: 'type-1',
       executingUnitId: 'unit-1',
       modalityId: 'modality-1',
-      situation: 'situation-1',
+      situation: Status.COMPLETED,
       estimatedValue: 1000,
       object: 'object-1',
       objectDescription: 'description',
@@ -86,6 +87,7 @@ describe('ProcessService', () => {
       10,
       'unit1',
       'punit1',
+      undefined,
     );
   });
 
@@ -103,7 +105,7 @@ describe('ProcessService', () => {
       processTypeId: 'type-1',
       executingUnitId: 'unit-1',
       modalityId: 'modality-1',
-      situation: 'situation-1',
+      situation: Status.COMPLETED,
       estimatedValue: 1000,
       object: 'object-1',
       objectDescription: 'description',

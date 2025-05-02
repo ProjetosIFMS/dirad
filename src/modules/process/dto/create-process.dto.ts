@@ -1,10 +1,12 @@
 import {
   IsArray,
   IsDateString,
+  IsEnum,
   IsNumber,
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Status } from '../types/Status';
 
 export class CreateProcessDto {
   @IsString()
@@ -23,8 +25,8 @@ export class CreateProcessDto {
   @IsArray()
   participatingUnits?: string[];
 
-  @IsString()
-  situation: string;
+  @IsEnum(Status)
+  situation: Status;
 
   @IsNumber()
   estimatedValue: number;

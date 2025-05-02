@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{base_url}}/process?page=1&perPage=10&participatingUnitShortName=TL&unitShortName=CG
+  url: {{base_url}}/process?page=1&perPage=10&status=PENDING
   body: none
   auth: inherit
 }
@@ -13,6 +13,5 @@ get {
 params:query {
   page: 1
   perPage: 10
-  participatingUnitShortName: TL
-  unitShortName: CG
+  status: PENDING
 }

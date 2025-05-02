@@ -70,7 +70,7 @@ model Step {
   originSectorId          String
   destinySector           Sector          @relation("destinySector", fields: [destinySectorId], references: [id])
   destinySectorId         String
-  template                String
+  template                String?
   estimatedCompletionDays Int
   status                  Status
   order                   Int
@@ -165,7 +165,7 @@ model Process {
   // Relação one-to-many com ParticipatingUnit: um processo pode ter muitas unidades participantes
   participatingUnits    ParticipatingUnit[]
   //costing               Float
-  situation             String //float
+  situation             Status //float
   estimatedValue        Float
   //totalValue            Float
   //supplierValue         Float
