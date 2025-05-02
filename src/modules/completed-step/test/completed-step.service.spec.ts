@@ -3,6 +3,7 @@ import { CompletedStepService } from '../completed-step.service';
 import {
   CreateCompletedStepUseCase,
   DeleteCompletedStepUseCase,
+  FindAllCompletedStepByOrderUseCase,
   FindAllCompletedStepUseCase,
   FindCompletedStepByIdUseCase,
   UpdateCompletedStepUseCase,
@@ -23,6 +24,12 @@ describe('CompletedStepService', () => {
         },
         {
           provide: FindAllCompletedStepUseCase,
+          useValue: {
+            execute: jest.fn(),
+          },
+        },
+        {
+          provide: FindAllCompletedStepByOrderUseCase,
           useValue: {
             execute: jest.fn(),
           },
