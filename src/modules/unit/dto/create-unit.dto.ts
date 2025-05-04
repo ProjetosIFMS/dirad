@@ -1,10 +1,6 @@
-import { IsDateString, IsString, IsUUID } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateUnitDto {
-  @IsString()
-  @IsUUID()
-  id: string;
-
   @IsString()
   name: string;
 
@@ -13,10 +9,4 @@ export class CreateUnitDto {
 
   @IsString()
   shortName: string;
-
-  @IsDateString()
-  createdAt: Date;
-
-  @IsDateString()
-  updatedAt: Date;
 }
