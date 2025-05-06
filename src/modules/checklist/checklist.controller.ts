@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ChecklistService } from './checklist.service';
 import { CreateChecklistDto } from './dto/create-checklist.dto';
@@ -26,8 +27,11 @@ export class ChecklistController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.checklistService.findOne(id);
+  findOne(
+    @Param('id') id: string,
+    @Query('includeStep') includeStep: boolean = false,
+  ) {
+    return this.checklistService.findOne(id, includeStep);
   }
 
   @Patch(':id')

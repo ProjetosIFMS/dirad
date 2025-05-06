@@ -12,9 +12,12 @@ export class FindChecklistByIdUseCase {
     private readonly checklisRepository: FindCheckListByIdRepository,
     private readonly logger: Logger = new Logger(),
   ) {}
-  async execute(id: string) {
+  async execute(id: string, includeStep = false) {
     try {
-      const checklists = await this.checklisRepository.findById(id);
+      const checklists = await this.checklisRepository.findById(
+        id,
+        includeStep,
+      );
       if (!checklists) {
         throw new NotFoundException(
           'No checklists found',
