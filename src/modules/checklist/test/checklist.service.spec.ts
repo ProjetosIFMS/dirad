@@ -70,9 +70,11 @@ describe('ChecklistService', () => {
 
   it('should call findOne use case', async () => {
     const id = 'test-id';
-    await service.findOne(id);
+    const includeStep = true;
+    await service.findOne(id, includeStep);
     expect(service['findChecklistByIdUseCase'].execute).toHaveBeenCalledWith(
       id,
+      includeStep,
     );
   });
 

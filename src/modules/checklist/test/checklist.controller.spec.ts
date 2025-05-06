@@ -90,6 +90,7 @@ describe('ChecklistController', () => {
 
   it('should call service findOne', async () => {
     const id = '1';
+    const includeStep = true;
     const checklist = {
       id: 'checklist-1',
       name: 'Test Checklist',
@@ -99,8 +100,8 @@ describe('ChecklistController', () => {
       updatedAt: new Date(),
     };
     jest.spyOn(service, 'findOne').mockResolvedValue(checklist);
-    expect(await controller.findOne(id)).toEqual(checklist);
-    expect(service.findOne).toHaveBeenCalledWith(id);
+    expect(await controller.findOne(id, includeStep)).toEqual(checklist);
+    expect(service.findOne).toHaveBeenCalledWith(id, includeStep);
   });
 
   it('should call service update', async () => {
