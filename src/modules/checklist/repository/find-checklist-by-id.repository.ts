@@ -4,13 +4,17 @@ import { PrismaService } from '../../../shared/databases/prisma.database';
 @Injectable()
 export class FindCheckListByIdRepository {
   constructor(private readonly prisma: PrismaService) {}
-  async findById(id: string) {
+  async findById(id: string, includeStep = false) {
     const checklists = await this.prisma.checklist.findUnique({
       where: {
         id,
       },
       include: {
-        completedStep: true,
+        completedStep: {
+          include: {
+            step: includeStep,
+          },
+        },
       },
     });
     return checklists;

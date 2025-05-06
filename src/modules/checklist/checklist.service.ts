@@ -26,8 +26,8 @@ export class ChecklistService {
     return this.findAllChecklistUseCase.execute();
   }
 
-  findOne(id: string) {
-    return this.findChecklistByIdUseCase.execute(id);
+  findOne(id: string, includeStep = false) {
+    return this.findChecklistByIdUseCase.execute(id, includeStep);
   }
 
   update(id: string, data: UpdateChecklistDto) {
