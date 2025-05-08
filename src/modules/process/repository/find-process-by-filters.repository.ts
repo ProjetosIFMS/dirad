@@ -19,6 +19,7 @@ export class FindProcessByFiltersRepository {
     expectedEndDate?: Date,
   ) {
     const skip = (page - 1) * perPage;
+    const insensitive = 'insensitive' as const;
     const where = {
       ...(unitShortName && { executingUnit: { shortName: unitShortName } }),
       ...(participatingUnitShortName && {
@@ -27,9 +28,13 @@ export class FindProcessByFiltersRepository {
         },
       }),
       ...(status && { situation: status }),
-      ...(modality && { modality: { name: modality } }),
-      ...(processType && { processType: { name: processType } }),
-      ...(object && { object }),
+      ...(modality && {
+        modality: { name: { contains: modality, mode: insensitive } },
+      }),
+      ...(processType && {
+        processType: { name: { contains: processType, mode: insensitive } },
+      }),
+      ...(object && { object: { contains: object, mode: insensitive } }),
       ...(startDate && { startDate: { gte: startDate } }),
       ...(expectedEndDate && { expectedEndDate: { lte: expectedEndDate } }),
     };
