@@ -6,7 +6,6 @@ import { UpdateProcessUseCase } from './use-cases/update-process.use-case';
 import { DeleteProcessUseCase } from './use-cases/delete-process.use-case';
 import { FindProcessByIdUseCase } from './use-cases/find-process-by-id.use-case';
 import { FindAllProcessesUseCase } from './use-cases/find-all-processes.use-case';
-import { Status } from './types/Status';
 
 @Injectable()
 export class ProcessService {
@@ -25,16 +24,26 @@ export class ProcessService {
   async findAll(
     page: number,
     perPage: number,
-    UnitShortName?: string,
-    PUnitShortName?: string,
-    status?: Status,
+    unitShortName?: string,
+    participatingUnitShortName?: string,
+    status?: string,
+    modality?: string,
+    processType?: string,
+    object?: string,
+    startDate?: string,
+    expectedEndDate?: string,
   ) {
     return await this.findAllProcessesUseCase.execute(
       page,
       perPage,
-      UnitShortName,
-      PUnitShortName,
+      unitShortName,
+      participatingUnitShortName,
       status,
+      modality,
+      processType,
+      object,
+      startDate,
+      expectedEndDate,
     );
   }
 

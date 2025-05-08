@@ -8,3 +8,4 @@ export * from './find-process-by-unit.repository';
 export * from './find-process-by-participatingunit.repository';
 export * from './find-process-by-shortnames-unit.repository';
 export * from './find-process-by-status.repository';
+export * from './find-process-by-filters.repository';

@@ -13,7 +13,6 @@ import {
 import { ProcessService } from './process.service';
 import { CreateProcessDto } from './dto/create-process.dto';
 import { UpdateProcessDto } from './dto/update-process.dto';
-import { Status } from './types/Status';
 
 @Controller('process')
 export class ProcessController {
@@ -28,16 +27,26 @@ export class ProcessController {
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perPage', new DefaultValuePipe(10), ParseIntPipe) perPage: number,
-    @Query('unitShortName') UnitShortName?: string,
-    @Query('participatingUnitShortName') PUnitShortName?: string,
-    @Query('status') status?: Status,
+    @Query('unitShortName') unitShortName?: string,
+    @Query('participatingUnitShortName') participatingUnitShortName?: string,
+    @Query('status') status?: string,
+    @Query('modality') modality?: string,
+    @Query('processType') processType?: string,
+    @Query('object') object?: string,
+    @Query('startDate') startDate?: string,
+    @Query('expectedEndDate') expectedEndDate?: string,
   ) {
     return this.processService.findAll(
       page,
       perPage,
-      UnitShortName,
-      PUnitShortName,
+      unitShortName,
+      participatingUnitShortName,
       status,
+      modality,
+      processType,
+      object,
+      startDate,
+      expectedEndDate,
     );
   }
   @Get(':id')
