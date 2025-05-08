@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   Logger,
   NotFoundException,
@@ -6,11 +7,8 @@ import {
 } from '@nestjs/common';
 import {
   FindAllProcessesRepository,
-  FindProcessByParticipatingUnitRepository,
-  FindProcessByUnitRepository,
+  FindProcessNumberRepository,
 } from '../repository';
-import { FindProcessByShortNamesRepository } from '../repository/find-process-by-shortnames-unit.repository';
-import { FindProcessByStatusRepository } from '../repository/find-process-by-status.repository';
 import { Status } from '../types/Status';
 import { FindProcessByFiltersRepository } from '../repository/find-process-by-filters.repository';
 
@@ -18,11 +16,8 @@ import { FindProcessByFiltersRepository } from '../repository/find-process-by-fi
 export class FindAllProcessesUseCase {
   constructor(
     private readonly findAllProcessesRepository: FindAllProcessesRepository,
-    private readonly findProcessByUnitRepository: FindProcessByUnitRepository,
-    private readonly findProcessByParticipatingUnitRepository: FindProcessByParticipatingUnitRepository,
-    private readonly findProcessByShortNamesRepository: FindProcessByShortNamesRepository,
-    private readonly findProcessByStatusRepository: FindProcessByStatusRepository,
     private readonly findProcessByFiltersRepository: FindProcessByFiltersRepository,
+    private readonly findProcessByProcessNumberRepository: FindProcessNumberRepository,
     private readonly logger: Logger,
   ) {}
 
@@ -31,19 +26,15 @@ export class FindAllProcessesUseCase {
     perPage: number,
     unitShortName?: string,
     participatingUnitShortName?: string,
-    status?: string,
+    status?: Status,
     modality?: string,
     processType?: string,
     object?: string,
+    processNumber?: string,
     startDate?: string,
     expectedEndDate?: string,
   ) {
     try {
-      const statusEnum =
-        status && Object.values(Status).includes(status as Status)
-          ? (status as Status)
-          : undefined;
-
       const startDateObj = startDate ? new Date(startDate) : undefined;
       const expectedEndDateObj = expectedEndDate
         ? new Date(expectedEndDate)
@@ -52,7 +43,7 @@ export class FindAllProcessesUseCase {
       const filters = {
         unitShortName,
         participatingUnitShortName,
-        status: statusEnum,
+        status,
         modality,
         processType,
         object,
@@ -60,70 +51,20 @@ export class FindAllProcessesUseCase {
         expectedEndDate: expectedEndDateObj,
       };
 
-      // if (unitShortName && participatingUnitShortName) {
-      //   const unitExists =
-      //     await this.findProcessByShortNamesRepository.listByUnitShortNames(
-      //       unitShortName,
-      //       participatingUnitShortName,
-      //       page,
-      //       perPage,
-      //     );
-      //   if (!unitExists) {
-      //     this.logger.error('Unit not found');
-      //     throw new NotFoundException('Unit not found');
-      //   }
-      //   this.logger.log(
-      //     'Processes ShortNames found',
-      //     FindAllProcessesUseCase.name,
-      //   );
-      //   return unitExists;
-      // }
+      if (processNumber) {
+        const processExists =
+          await this.findProcessByProcessNumberRepository.findProcessNumber(
+            processNumber,
+          );
 
-      // if (unitShortName) {
-      //   const unitExists =
-      //     await this.findProcessByUnitRepository.listByUnitShortName(
-      //       unitShortName,
-      //       page,
-      //       perPage,
-      //     );
-      //   if (!unitExists) {
-      //     this.logger.error('Unit not found');
-      //     throw new NotFoundException('Unit not found');
-      //   }
-      //   this.logger.log('Processes found', FindAllProcessesUseCase.name);
-      //   return unitExists;
-      // }
+        if (!processExists) {
+          this.logger.error('Process not found', FindAllProcessesUseCase.name);
+          throw new NotFoundException('Process not found');
+        }
 
-      // if (participatingUnitShortName) {
-      //   const PunitExists =
-      //     await this.findProcessByParticipatingUnitRepository.listByParticipatingUnitShortName(
-      //       participatingUnitShortName,
-      //       page,
-      //       perPage,
-      //     );
-      //   if (!PunitExists) {
-      //     this.logger.error('Unit not found');
-      //     throw new NotFoundException('Unit not found');
-      //   }
-      //   this.logger.log('Processes found', FindAllProcessesUseCase.name);
-      //   return PunitExists;
-      // }
-
-      // if (status) {
-      //   const statusExists =
-      //     await this.findProcessByStatusRepository.listProcessByStatus(
-      //       status,
-      //       unitShortName,
-      //       page,
-      //       perPage,
-      //     );
-      //   if (!statusExists || (Array.isArray(statusExists) && statusExists.length === 0)) {
-      //     this.logger.error('No processes found for the given status');
-      //     throw new NotFoundException('No processes found for the given status');
-      //   }
-      //   this.logger.log('Processes found', FindAllProcessesUseCase.name);
-      //   return statusExists;
-      // }
+        this.logger.log('Process found', FindAllProcessesUseCase.name);
+        return processExists;
+      }
 
       if (filters) {
         const filterProcess =
@@ -132,7 +73,7 @@ export class FindAllProcessesUseCase {
             perPage,
             unitShortName,
             participatingUnitShortName,
-            statusEnum,
+            status,
             modality,
             processType,
             object,
@@ -160,6 +101,12 @@ export class FindAllProcessesUseCase {
 
       return processes;
     } catch (err) {
+      if (
+        err.name === 'PrismaClientValidationError' ||
+        err.name === 'PrismaClientKnownRequestError'
+      ) {
+        throw new BadRequestException('Parâmetro inválido ou mal formatado.');
+      }
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error finding processes',

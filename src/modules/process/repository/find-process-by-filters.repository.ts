@@ -9,7 +9,6 @@ export class FindProcessByFiltersRepository {
   async findProcessByFilters(
     page: number,
     perPage: number,
-    // processNumber?: string,
     unitShortName?: string,
     participatingUnitShortName?: string,
     status?: Status,
@@ -21,7 +20,6 @@ export class FindProcessByFiltersRepository {
   ) {
     const skip = (page - 1) * perPage;
     const where = {
-      // ...(processNumber && { processNumber }),
       ...(unitShortName && { executingUnit: { shortName: unitShortName } }),
       ...(participatingUnitShortName && {
         participatingUnits: {

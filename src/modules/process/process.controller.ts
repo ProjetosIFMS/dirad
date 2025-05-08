@@ -13,6 +13,7 @@ import {
 import { ProcessService } from './process.service';
 import { CreateProcessDto } from './dto/create-process.dto';
 import { UpdateProcessDto } from './dto/update-process.dto';
+import { Status } from './types/Status';
 
 @Controller('process')
 export class ProcessController {
@@ -29,10 +30,11 @@ export class ProcessController {
     @Query('perPage', new DefaultValuePipe(10), ParseIntPipe) perPage: number,
     @Query('unitShortName') unitShortName?: string,
     @Query('participatingUnitShortName') participatingUnitShortName?: string,
-    @Query('status') status?: string,
+    @Query('status') status?: Status,
     @Query('modality') modality?: string,
     @Query('processType') processType?: string,
     @Query('object') object?: string,
+    @Query('processNumber') processNumber?: string,
     @Query('startDate') startDate?: string,
     @Query('expectedEndDate') expectedEndDate?: string,
   ) {
@@ -45,6 +47,7 @@ export class ProcessController {
       modality,
       processType,
       object,
+      processNumber,
       startDate,
       expectedEndDate,
     );

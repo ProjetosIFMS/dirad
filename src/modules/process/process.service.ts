@@ -6,6 +6,7 @@ import { UpdateProcessUseCase } from './use-cases/update-process.use-case';
 import { DeleteProcessUseCase } from './use-cases/delete-process.use-case';
 import { FindProcessByIdUseCase } from './use-cases/find-process-by-id.use-case';
 import { FindAllProcessesUseCase } from './use-cases/find-all-processes.use-case';
+import { Status } from './types/Status';
 
 @Injectable()
 export class ProcessService {
@@ -26,10 +27,11 @@ export class ProcessService {
     perPage: number,
     unitShortName?: string,
     participatingUnitShortName?: string,
-    status?: string,
+    status?: Status,
     modality?: string,
     processType?: string,
     object?: string,
+    processNumber?: string,
     startDate?: string,
     expectedEndDate?: string,
   ) {
@@ -42,6 +44,7 @@ export class ProcessService {
       modality,
       processType,
       object,
+      processNumber,
       startDate,
       expectedEndDate,
     );
