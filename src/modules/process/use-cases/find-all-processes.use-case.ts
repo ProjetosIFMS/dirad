@@ -66,7 +66,7 @@ export class FindAllProcessesUseCase {
         return processExists;
       }
 
-      if (filters) {
+      if (Object.values(filters).some(value => value !== undefined)) {
         const filterProcess =
           await this.findProcessByFiltersRepository.findProcessByFilters(
             page,
