@@ -66,7 +66,7 @@ export class FindAllProcessesUseCase {
         return processExists;
       }
 
-      if (Object.values(filters).some(value => value !== undefined)) {
+      if (Object.values(filters).some((value) => value !== undefined)) {
         const filterProcess =
           await this.findProcessByFiltersRepository.findProcessByFilters(
             page,
@@ -82,9 +82,6 @@ export class FindAllProcessesUseCase {
           );
         if (filterProcess.data.length === 0) {
           this.logger.error('No processes found for the given filters');
-          throw new NotFoundException(
-            'No processes found for the given filters',
-          );
         }
         this.logger.log(
           'Processes filtered found',
