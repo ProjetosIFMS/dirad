@@ -168,6 +168,12 @@ describe('ProcessController', () => {
       'unit1',
       'punit1',
       undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
     );
   });
 
