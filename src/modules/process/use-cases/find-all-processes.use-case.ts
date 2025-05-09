@@ -2,13 +2,9 @@ import {
   BadRequestException,
   Injectable,
   Logger,
-  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import {
-  FindAllProcessesRepository,
-  FindProcessNumberRepository,
-} from '../repository';
+import { FindAllProcessesRepository } from '../repository';
 import { Status } from '../types/Status';
 import { FindProcessByFiltersRepository } from '../repository/find-process-by-filters.repository';
 
@@ -17,7 +13,6 @@ export class FindAllProcessesUseCase {
   constructor(
     private readonly findAllProcessesRepository: FindAllProcessesRepository,
     private readonly findProcessByFiltersRepository: FindProcessByFiltersRepository,
-    private readonly findProcessByProcessNumberRepository: FindProcessNumberRepository,
     private readonly logger: Logger,
   ) {}
 
@@ -47,24 +42,10 @@ export class FindAllProcessesUseCase {
         modality,
         processType,
         object,
+        processNumber,
         startDate: startDateObj,
         expectedEndDate: expectedEndDateObj,
       };
-
-      if (processNumber) {
-        const processExists =
-          await this.findProcessByProcessNumberRepository.findProcessNumber(
-            processNumber,
-          );
-
-        if (!processExists) {
-          this.logger.error('Process not found', FindAllProcessesUseCase.name);
-          throw new NotFoundException('Process not found');
-        }
-
-        this.logger.log('Process found', FindAllProcessesUseCase.name);
-        return processExists;
-      }
 
       if (Object.values(filters).some((value) => value !== undefined)) {
         const filterProcess =
@@ -77,6 +58,7 @@ export class FindAllProcessesUseCase {
             modality,
             processType,
             object,
+            processNumber,
             startDateObj,
             expectedEndDateObj,
           );

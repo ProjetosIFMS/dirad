@@ -15,6 +15,7 @@ export class FindProcessByFiltersRepository {
     modality?: string,
     processType?: string,
     object?: string,
+    processNumber?: string,
     startDate?: Date,
     expectedEndDate?: Date,
   ) {
@@ -35,6 +36,9 @@ export class FindProcessByFiltersRepository {
         processType: { name: { contains: processType, mode: insensitive } },
       }),
       ...(object && { object: { contains: object, mode: insensitive } }),
+      ...(processNumber && {
+        processNumber: { contains: processNumber, mode: insensitive },
+      }),
       ...(startDate && { startDate: { gte: startDate } }),
       ...(expectedEndDate && { expectedEndDate: { lte: expectedEndDate } }),
     };
