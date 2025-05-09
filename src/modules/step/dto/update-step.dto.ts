@@ -22,7 +22,8 @@ export class UpdateStepDto {
   status: Status;
 
   @IsInt()
-  order: number;
+  @IsOptional()
+  order?: number;
 
   @IsOptional()
   @IsString()
