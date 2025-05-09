@@ -1,100 +1,75 @@
 import {
+  BadRequestException,
   Injectable,
   Logger,
-  NotFoundException,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import {
-  FindAllProcessesRepository,
-  FindProcessByParticipatingUnitRepository,
-  FindProcessByUnitRepository,
-} from '../repository';
-import { FindProcessByShortNamesRepository } from '../repository/find-process-by-shortnames-unit.repository';
-import { FindProcessByStatusRepository } from '../repository/find-process-by-status.repository';
+import { FindAllProcessesRepository } from '../repository';
 import { Status } from '../types/Status';
+import { FindProcessByFiltersRepository } from '../repository/find-process-by-filters.repository';
 
 @Injectable()
 export class FindAllProcessesUseCase {
   constructor(
     private readonly findAllProcessesRepository: FindAllProcessesRepository,
-    private readonly findProcessByUnitRepository: FindProcessByUnitRepository,
-    private readonly findProcessByParticipatingUnitRepository: FindProcessByParticipatingUnitRepository,
-    private readonly findProcessByShortNamesRepository: FindProcessByShortNamesRepository,
-    private readonly findProcessByStatusRepository: FindProcessByStatusRepository,
+    private readonly findProcessByFiltersRepository: FindProcessByFiltersRepository,
     private readonly logger: Logger,
   ) {}
 
   async execute(
     page: number,
     perPage: number,
-    UnitShortName?: string,
+    unitShortName?: string,
     participatingUnitShortName?: string,
     status?: Status,
+    modality?: string,
+    processType?: string,
+    object?: string,
+    processNumber?: string,
+    startDate?: string,
+    expectedEndDate?: string,
   ) {
     try {
-      if (UnitShortName && participatingUnitShortName) {
-        const unitExists =
-          await this.findProcessByShortNamesRepository.listByUnitShortNames(
-            UnitShortName,
-            participatingUnitShortName,
+      const startDateObj = startDate ? new Date(startDate) : undefined;
+      const expectedEndDateObj = expectedEndDate
+        ? new Date(expectedEndDate)
+        : undefined;
+
+      const filters = {
+        unitShortName,
+        participatingUnitShortName,
+        status,
+        modality,
+        processType,
+        object,
+        processNumber,
+        startDate: startDateObj,
+        expectedEndDate: expectedEndDateObj,
+      };
+
+      if (Object.values(filters).some((value) => value !== undefined)) {
+        const filterProcess =
+          await this.findProcessByFiltersRepository.findProcessByFilters(
             page,
             perPage,
+            unitShortName,
+            participatingUnitShortName,
+            status,
+            modality,
+            processType,
+            object,
+            processNumber,
+            startDateObj,
+            expectedEndDateObj,
           );
-        if (!unitExists) {
-          this.logger.error('Unit not found');
-          throw new NotFoundException('Unit not found');
+        if (filterProcess.data.length === 0) {
+          this.logger.error('No processes found for the given filters');
         }
         this.logger.log(
-          'Processes ShortNames found',
+          'Processes filtered found',
           FindAllProcessesUseCase.name,
         );
-        return unitExists;
-      }
-
-      if (UnitShortName) {
-        const unitExists =
-          await this.findProcessByUnitRepository.listByUnitShortName(
-            UnitShortName,
-            page,
-            perPage,
-          );
-        if (!unitExists) {
-          this.logger.error('Unit not found');
-          throw new NotFoundException('Unit not found');
-        }
-        this.logger.log('Processes found', FindAllProcessesUseCase.name);
-        return unitExists;
-      }
-
-      if (participatingUnitShortName) {
-        const PunitExists =
-          await this.findProcessByParticipatingUnitRepository.listByParticipatingUnitShortName(
-            participatingUnitShortName,
-            page,
-            perPage,
-          );
-        if (!PunitExists) {
-          this.logger.error('Unit not found');
-          throw new NotFoundException('Unit not found');
-        }
-        this.logger.log('Processes found', FindAllProcessesUseCase.name);
-        return PunitExists;
-      }
-
-      if (status) {
-        const statusExists =
-          await this.findProcessByStatusRepository.listProcessByStatus(
-            status,
-            UnitShortName,
-            page,
-            perPage,
-          );
-        if (!statusExists || (Array.isArray(statusExists) && statusExists.length === 0)) {
-          this.logger.error('No processes found for the given status');
-          throw new NotFoundException('No processes found for the given status');
-        }
-        this.logger.log('Processes found', FindAllProcessesUseCase.name);
-        return statusExists;
+        return filterProcess;
       }
 
       const processes = await this.findAllProcessesRepository.findProcesses(
@@ -105,6 +80,12 @@ export class FindAllProcessesUseCase {
 
       return processes;
     } catch (err) {
+      if (
+        err.name === 'PrismaClientValidationError' ||
+        err.name === 'PrismaClientKnownRequestError'
+      ) {
+        throw new BadRequestException('Parâmetro inválido ou mal formatado.');
+      }
       const error = new ServiceUnavailableException('Something bad happened', {
         cause: err,
         description: 'Error finding processes',

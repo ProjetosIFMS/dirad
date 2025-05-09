@@ -10,6 +10,16 @@ export class FindProcessNumberRepository {
       where: {
         processNumber,
       },
+      include: {
+        processType: true,
+        executingUnit: true,
+        modality: true,
+        participatingUnits: {
+          include: {
+            unit: true,
+          },
+        },
+      },
     });
   }
 }

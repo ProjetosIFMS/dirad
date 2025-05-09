@@ -25,16 +25,28 @@ export class ProcessService {
   async findAll(
     page: number,
     perPage: number,
-    UnitShortName?: string,
-    PUnitShortName?: string,
+    unitShortName?: string,
+    participatingUnitShortName?: string,
     status?: Status,
+    modality?: string,
+    processType?: string,
+    object?: string,
+    processNumber?: string,
+    startDate?: string,
+    expectedEndDate?: string,
   ) {
     return await this.findAllProcessesUseCase.execute(
       page,
       perPage,
-      UnitShortName,
-      PUnitShortName,
+      unitShortName,
+      participatingUnitShortName,
       status,
+      modality,
+      processType,
+      object,
+      processNumber,
+      startDate,
+      expectedEndDate,
     );
   }
 

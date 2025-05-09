@@ -28,16 +28,28 @@ export class ProcessController {
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('perPage', new DefaultValuePipe(10), ParseIntPipe) perPage: number,
-    @Query('unitShortName') UnitShortName?: string,
-    @Query('participatingUnitShortName') PUnitShortName?: string,
+    @Query('unitShortName') unitShortName?: string,
+    @Query('participatingUnitShortName') participatingUnitShortName?: string,
     @Query('status') status?: Status,
+    @Query('modality') modality?: string,
+    @Query('processType') processType?: string,
+    @Query('object') object?: string,
+    @Query('processNumber') processNumber?: string,
+    @Query('startDate') startDate?: string,
+    @Query('expectedEndDate') expectedEndDate?: string,
   ) {
     return this.processService.findAll(
       page,
       perPage,
-      UnitShortName,
-      PUnitShortName,
+      unitShortName,
+      participatingUnitShortName,
       status,
+      modality,
+      processType,
+      object,
+      processNumber,
+      startDate,
+      expectedEndDate,
     );
   }
   @Get(':id')

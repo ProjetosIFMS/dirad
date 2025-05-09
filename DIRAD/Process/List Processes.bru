@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{base_url}}/process?page=1&perPage=10&status=PENDING
+  url: {{base_url}}/process?page=1&perPage=10
   body: none
   auth: inherit
 }
@@ -13,5 +13,13 @@ get {
 params:query {
   page: 1
   perPage: 10
-  status: PENDING
+  ~startDate: 2025-05-01
+  ~status: COMPLETED
+  ~expectedEndDate: 2025-06-30
+  ~unitShortName: DR
+  ~participatingUnitShortName: CG
+  ~modality: Tomada de Preço
+  ~processType: Dispensa
+  ~object: Manutenção preventiva
+  ~processNumber: 0101010101-01
 }
